@@ -1,4 +1,4 @@
-package com.rodrigo.flexmobilidade.repository;
+package com.rodrigo.flexmobilidade.repositories;
 
 import com.rodrigo.flexmobilidade.model.Reserva;
 import org.springframework.data.jpa.repository.JpaRepository;
