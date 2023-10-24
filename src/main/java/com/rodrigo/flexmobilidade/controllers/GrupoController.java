@@ -17,12 +17,13 @@ public class GrupoController {
 
     private final GrupoService grupoService;
 
-    @Operation(summary = "Salva um Categoria de carros", method = "POST")
+    @Operation(summary = "Cadastra um grupo", method = "POST")
     @PostMapping
     public ResponseEntity<Grupo> save (@RequestBody Grupo grupo){
         return new ResponseEntity<>(grupoService.save(grupo), HttpStatus.CREATED);
     }
 
+    @Operation(summary = "Mostra os grupos cadastrados", method = "GET")
     @GetMapping
     public ResponseEntity<List<Grupo>> findAll(){
         return ResponseEntity.ok(grupoService.findAll());
