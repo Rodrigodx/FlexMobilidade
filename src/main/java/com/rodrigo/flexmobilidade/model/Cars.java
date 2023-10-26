@@ -15,10 +15,10 @@ public class Cars {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String name;
+    private String model;
 
-    @ManyToOne
-    @JoinColumn(name = "grupo_id")
+    @Embedded
+    @AttributeOverride(name = "name", column = @Column(name = "cars_grupo_name"))
     private Grupo grupo;
 
 }
