@@ -1,6 +1,7 @@
 package com.rodrigo.flexmobilidade.services;
 
 import com.rodrigo.flexmobilidade.model.Cars;
+import com.rodrigo.flexmobilidade.model.Grupo;
 import com.rodrigo.flexmobilidade.repositories.CarsRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +22,11 @@ public class CarsService {
     @ReadOnlyProperty
     public List<Cars> findAll(){
         return carsRepository.findAll();
+    }
+
+    @ReadOnlyProperty
+    public List<Cars> findByGrupoName(String name){
+        return carsRepository.findByGrupoName(name);
     }
 
 }

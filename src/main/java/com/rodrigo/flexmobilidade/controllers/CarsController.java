@@ -1,6 +1,7 @@
 package com.rodrigo.flexmobilidade.controllers;
 
 import com.rodrigo.flexmobilidade.model.Cars;
+import com.rodrigo.flexmobilidade.model.Grupo;
 import com.rodrigo.flexmobilidade.services.CarsService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
@@ -28,4 +29,13 @@ public class CarsController {
     public ResponseEntity<List<Cars>> findAll(){
         return ResponseEntity.ok(carsService.findAll());
     }
+
+
+    @Operation(summary = "Mostra todos os carros pertencentes a categoria", method = "GET")
+    @GetMapping(value = "/byGroup")
+    public ResponseEntity<List<Cars>> findByGroupName(@RequestParam String name){
+        return ResponseEntity.ok(carsService.findByGrupoName(name));
+    }
+
+
 }
