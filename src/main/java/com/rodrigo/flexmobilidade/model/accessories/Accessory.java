@@ -1,4 +1,4 @@
-package com.rodrigo.flexmobilidade.model.acessories;
+package com.rodrigo.flexmobilidade.model.accessories;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

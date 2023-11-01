@@ -1,6 +1,8 @@
 package com.rodrigo.flexmobilidade.controllers;
 
-import com.rodrigo.flexmobilidade.model.acessories.Accessory;
+import com.rodrigo.flexmobilidade.model.accessories.Accessory;
+import com.rodrigo.flexmobilidade.model.accessories.dto.AccessoryRequestDTO;
+import com.rodrigo.flexmobilidade.model.accessories.dto.AccessoryResponseDTO;
 import com.rodrigo.flexmobilidade.services.AccessoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,12 +22,12 @@ public class AccessoryController {
     private final AccessoryService accessoryService;
 
     @PostMapping
-    public ResponseEntity<Accessory> save(Accessory accessory){
+    public ResponseEntity<AccessoryResponseDTO> save(AccessoryRequestDTO accessory){
         return new ResponseEntity<>(accessoryService.save(accessory), HttpStatus.CREATED);
     }
 
     @GetMapping
-    public ResponseEntity<List<Accessory>> findAll(){
+    public ResponseEntity<List<AccessoryResponseDTO>> findAll(){
         return ResponseEntity.ok(accessoryService.findAll());
     }
 
