@@ -22,4 +22,5 @@ public class Accessory {
 
     private Double value;
 
+
 }
