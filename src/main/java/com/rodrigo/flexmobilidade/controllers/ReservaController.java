@@ -1,6 +1,8 @@
 package com.rodrigo.flexmobilidade.controllers;
 
-import com.rodrigo.flexmobilidade.model.Reserva;
+import com.rodrigo.flexmobilidade.model.reserva.Reserva;
+import com.rodrigo.flexmobilidade.model.reserva.dto.ReservaRequestDTO;
+import com.rodrigo.flexmobilidade.model.reserva.dto.ReservaResponseDTO;
 import com.rodrigo.flexmobilidade.services.ReservaService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
@@ -18,12 +20,12 @@ public class ReservaController {
     private final ReservaService reservaService;
     @Operation(summary = " um Categoria de carros", method = "POST")
     @PostMapping
-    public ResponseEntity<Reserva> save(@RequestBody Reserva reserva){
-        return new ResponseEntity<>(reservaService.save(reserva), HttpStatus.CREATED);
+    public ResponseEntity<ReservaResponseDTO> save(@RequestBody ReservaRequestDTO reservaRequestDTO){
+        return new ResponseEntity<>(reservaService.save(reservaRequestDTO), HttpStatus.CREATED);
     }
 
     @GetMapping
-    public ResponseEntity<List<Reserva>> findAll(){
+    public ResponseEntity<List<ReservaResponseDTO>> findAll(){
         return ResponseEntity.ok(reservaService.findAll());
     }
 
