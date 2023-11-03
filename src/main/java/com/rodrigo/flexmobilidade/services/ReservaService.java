@@ -12,6 +12,7 @@ import org.springframework.data.annotation.ReadOnlyProperty;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -31,5 +32,11 @@ public class ReservaService {
     public List<ReservaResponseDTO> findAll (){
         List<Reserva> reservaList = reservaRepository.findAll();
         return reservaList.stream().map(reserva -> modelMapper.map(reserva, ReservaResponseDTO.class)).collect(Collectors.toList());
+    }
+
+    @ReadOnlyProperty
+    public Optional<ReservaResponseDTO> findById(Integer id){
+        Optional<Reserva> reserva = reservaRepository.findById(id);
+        return Optional.ofNullable(modelMapper.map(reserva, ReservaResponseDTO.class));
     }
 }

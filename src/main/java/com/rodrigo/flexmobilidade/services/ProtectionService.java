@@ -11,6 +11,7 @@ import org.springframework.data.annotation.ReadOnlyProperty;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -18,19 +19,21 @@ import java.util.stream.Collectors;
 public class ProtectionService {
 
     private final ProtectionRepository protectionRepository;
-
     private final ModelMapper modelMapper = new ModelMapper();
     @Transactional
     public ProtectionResponseDTO save(ProtectionRequestDTO protection){
         Protection protection1 = protectionRepository.save(modelMapper.map(protection, Protection.class));
         return modelMapper.map(protection1, ProtectionResponseDTO.class);
     }
-
     @ReadOnlyProperty
     public List<ProtectionResponseDTO> findAll(){
         List<Protection> protections = protectionRepository.findAll();
         return protections.stream().map(protection -> modelMapper.map(protection, ProtectionResponseDTO.class)).collect(Collectors.toList());
     }
-
+    @ReadOnlyProperty
+    public Optional<ProtectionResponseDTO> findById(Integer id){
+        Optional<Protection> protection = protectionRepository.findById(id);
+        return Optional.ofNullable(modelMapper.map(protection, ProtectionResponseDTO.class));
+    }
 
 }

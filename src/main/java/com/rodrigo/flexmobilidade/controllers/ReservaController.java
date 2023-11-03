@@ -1,6 +1,5 @@
 package com.rodrigo.flexmobilidade.controllers;
 
-import com.rodrigo.flexmobilidade.model.reserva.Reserva;
 import com.rodrigo.flexmobilidade.model.reserva.dto.ReservaRequestDTO;
 import com.rodrigo.flexmobilidade.model.reserva.dto.ReservaResponseDTO;
 import com.rodrigo.flexmobilidade.services.ReservaService;
@@ -11,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/api/reserva")
@@ -23,12 +23,13 @@ public class ReservaController {
     public ResponseEntity<ReservaResponseDTO> save(@RequestBody ReservaRequestDTO reservaRequestDTO){
         return new ResponseEntity<>(reservaService.save(reservaRequestDTO), HttpStatus.CREATED);
     }
-
     @GetMapping
     public ResponseEntity<List<ReservaResponseDTO>> findAll(){
         return ResponseEntity.ok(reservaService.findAll());
     }
-
-
+    @GetMapping(value = "/id")
+    public ResponseEntity<Optional<ReservaResponseDTO>> findById(Integer id){
+        return ResponseEntity.ok(reservaService.findById(id));
+    }
 
 }

@@ -11,6 +11,7 @@ import org.springframework.data.annotation.ReadOnlyProperty;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -18,19 +19,21 @@ import java.util.stream.Collectors;
 public class AccessoryService {
 
     private final AccessoryRepository accessoryRepository;
-
     private final ModelMapper modelMapper = new ModelMapper();
-
     @Transactional
     public AccessoryResponseDTO save(AccessoryRequestDTO accessory){
         Accessory accessory1 = accessoryRepository.save(modelMapper.map(accessory, Accessory.class));
         return modelMapper.map(accessory1, AccessoryResponseDTO.class);
     }
-
     @ReadOnlyProperty
     public List<AccessoryResponseDTO> findAll(){
         List<Accessory> accessories = accessoryRepository.findAll();
         return accessories.stream().map(accessory -> modelMapper.map(accessory, AccessoryResponseDTO.class)).collect(Collectors.toList());
+    }
+    @ReadOnlyProperty
+    public Optional<AccessoryResponseDTO> findById(Integer id){
+        Optional<Accessory> accessory = accessoryRepository.findById(id);
+        return Optional.ofNullable(modelMapper.map(accessory, AccessoryResponseDTO.class));
     }
 
 

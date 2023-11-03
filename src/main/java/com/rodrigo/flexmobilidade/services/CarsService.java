@@ -1,17 +1,16 @@
 package com.rodrigo.flexmobilidade.services;
 
-import com.rodrigo.flexmobilidade.dto.cars.CarsRequestDTO;
-import com.rodrigo.flexmobilidade.dto.cars.CarsResponseDTO;
-import com.rodrigo.flexmobilidade.model.Cars;
+import com.rodrigo.flexmobilidade.model.cars.dto.CarsRequestDTO;
+import com.rodrigo.flexmobilidade.model.cars.dto.CarsResponseDTO;
+import com.rodrigo.flexmobilidade.model.cars.Cars;
 import com.rodrigo.flexmobilidade.repositories.CarsRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.annotation.ReadOnlyProperty;
 import org.springframework.stereotype.Service;
-
-
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -34,6 +33,11 @@ public class CarsService {
     public List<CarsResponseDTO> findByGrupoName(String name){
         List<Cars> carsList = carsRepository.findByGrupoName(name);
         return carsList.stream().map(cars -> modelMapper.map(cars, CarsResponseDTO.class)).collect(Collectors.toList());
+    }
+    @ReadOnlyProperty
+    public Optional<CarsResponseDTO> findById(Integer id){
+        Optional<Cars> cars = carsRepository.findById(id);
+        return Optional.ofNullable(modelMapper.map(cars, CarsResponseDTO.class));
     }
 
 }
