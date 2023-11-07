@@ -1,5 +1,9 @@
-package com.rodrigo.flexmobilidade.model;
+package com.rodrigo.flexmobilidade.model.reserva;
 
+import com.rodrigo.flexmobilidade.model.accessories.Accessory;
+import com.rodrigo.flexmobilidade.model.additionalutility.AdditionalUtility;
+import com.rodrigo.flexmobilidade.model.protections.Protection;
+import com.rodrigo.flexmobilidade.model.protections.dto.ProtectionResponseDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,6 +11,8 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -28,4 +34,14 @@ public class Reserva {
     @Embedded
     private PersonalData personalData;
 
+    @OneToOne
+    private Protection protection;
+
+    @OneToMany
+    @JoinTable(name = "accessories")
+    private List<Accessory> accessories = new ArrayList<>();
+
+    @OneToMany
+    @JoinTable(name = "additional-utility")
+    private List<AdditionalUtility> additionalUtilities = new ArrayList<>();
 }
