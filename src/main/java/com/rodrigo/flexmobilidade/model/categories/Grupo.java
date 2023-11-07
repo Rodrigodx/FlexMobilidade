@@ -1,4 +1,4 @@
-package com.rodrigo.flexmobilidade.model.reserva;
+package com.rodrigo.flexmobilidade.model.categories;
 
 
 import jakarta.persistence.*;
