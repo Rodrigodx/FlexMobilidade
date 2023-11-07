@@ -38,10 +38,10 @@ public class Reserva {
     private Protection protection;
 
     @OneToMany
-    @JoinTable(name = "accessories")
+    @JoinTable(name = "reserva-accessories")
     private List<Accessory> accessories = new ArrayList<>();
 
     @OneToMany
-    @JoinTable(name = "additional-utility")
+    @JoinTable(name = "reserva-utilities")
     private List<AdditionalUtility> additionalUtilities = new ArrayList<>();
 }
