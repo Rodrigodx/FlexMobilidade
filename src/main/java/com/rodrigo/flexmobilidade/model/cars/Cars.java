@@ -1,5 +1,6 @@
-package com.rodrigo.flexmobilidade.model.reserva;
+package com.rodrigo.flexmobilidade.model.cars;
 
+import com.rodrigo.flexmobilidade.model.categories.Grupo;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

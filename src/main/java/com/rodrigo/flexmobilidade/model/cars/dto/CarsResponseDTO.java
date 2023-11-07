@@ -1,6 +1,6 @@
-package com.rodrigo.flexmobilidade.model.reserva.dto;
+package com.rodrigo.flexmobilidade.model.cars.dto;
 
-import com.rodrigo.flexmobilidade.model.reserva.Grupo;
+import com.rodrigo.flexmobilidade.model.categories.Grupo;
 import lombok.Data;
 
 @Data
