@@ -31,9 +31,9 @@ public class ProtectionService {
         return protections.stream().map(protection -> modelMapper.map(protection, ProtectionResponseDTO.class)).collect(Collectors.toList());
     }
     @ReadOnlyProperty
-    public Optional<ProtectionResponseDTO> findById(Integer id){
-        Optional<Protection> protection = protectionRepository.findById(id);
-        return Optional.ofNullable(modelMapper.map(protection, ProtectionResponseDTO.class));
+    public ProtectionResponseDTO findById(Integer id){
+        Protection protection = protectionRepository.findById(id).get();
+        return modelMapper.map(protection, ProtectionResponseDTO.class);
     }
 
 }

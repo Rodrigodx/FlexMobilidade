@@ -1,7 +1,8 @@
 package com.rodrigo.flexmobilidade.controllers;
 
+import com.rodrigo.flexmobilidade.model.additionalutility.AdditionalUtility;
 import com.rodrigo.flexmobilidade.model.additionalutility.dto.AdditionalUtilityRequestDTO;
-import com.rodrigo.flexmobilidade.model.additionalutility.dto.AdditionalUtilityResponseDTO
+import com.rodrigo.flexmobilidade.model.additionalutility.dto.AdditionalUtilityResponseDTO;
 import com.rodrigo.flexmobilidade.services.AdditionalUtilityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -29,7 +30,7 @@ public class AdditionalUtilityController {
         return ResponseEntity.ok(utilityService.findAll());
     }
     @GetMapping(value = "/id")
-    public ResponseEntity<Optional<AdditionalUtilityResponseDTO>> findById(Integer id){
+    public ResponseEntity<AdditionalUtility> findById(Integer id){
         return ResponseEntity.ok(utilityService.findById(id));
     }
 

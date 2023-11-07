@@ -31,9 +31,8 @@ public class AdditionalUtilityService {
         return additionalUtilities.stream().map(additionalUtility -> modelMapper.map(additionalUtility, AdditionalUtilityResponseDTO.class)).collect(Collectors.toList());
     }
     @ReadOnlyProperty
-    public Optional<AdditionalUtilityResponseDTO> findById(Integer id){
-        Optional<AdditionalUtility> additionalUtility = utilityRepository.findById(id);
-        return Optional.ofNullable(modelMapper.map(additionalUtility, AdditionalUtilityResponseDTO.class));
+    public AdditionalUtility findById(Integer id){
+        return utilityRepository.findById(id).get();
     }
 
 }

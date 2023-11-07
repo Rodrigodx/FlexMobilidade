@@ -26,7 +26,7 @@ public class ProtectionController {
         return ResponseEntity.ok(protectionService.findAll());
     }
     @GetMapping(value = "/id")
-    public ResponseEntity<Optional<ProtectionResponseDTO>> findById(Integer id){
+    public ResponseEntity<ProtectionResponseDTO> findById(Integer id){
         return ResponseEntity.ok(protectionService.findById(id));
     }
 }

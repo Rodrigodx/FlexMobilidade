@@ -1,5 +1,7 @@
 package com.rodrigo.flexmobilidade.controllers;
 
+import com.rodrigo.flexmobilidade.model.accessories.Accessory;
+import com.rodrigo.flexmobilidade.model.accessories.dto.AccessoryDTO;
 import com.rodrigo.flexmobilidade.model.accessories.dto.AccessoryRequestDTO;
 import com.rodrigo.flexmobilidade.model.accessories.dto.AccessoryResponseDTO;
 import com.rodrigo.flexmobilidade.services.AccessoryService;
@@ -29,7 +31,7 @@ public class AccessoryController {
         return ResponseEntity.ok(accessoryService.findAll());
     }
     @GetMapping(value = "/id")
-    public ResponseEntity<Optional<AccessoryResponseDTO>> findById(Integer id){
+    public ResponseEntity<Accessory> findById(Integer id){
         return ResponseEntity.ok(accessoryService.findById(id));
     }
 

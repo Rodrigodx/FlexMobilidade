@@ -1,6 +1,7 @@
 package com.rodrigo.flexmobilidade.services;
 
 import com.rodrigo.flexmobilidade.model.accessories.Accessory;
+import com.rodrigo.flexmobilidade.model.accessories.dto.AccessoryDTO;
 import com.rodrigo.flexmobilidade.model.accessories.dto.AccessoryRequestDTO;
 import com.rodrigo.flexmobilidade.model.accessories.dto.AccessoryResponseDTO;
 import com.rodrigo.flexmobilidade.repositories.AccessoryRepository;
@@ -31,9 +32,8 @@ public class AccessoryService {
         return accessories.stream().map(accessory -> modelMapper.map(accessory, AccessoryResponseDTO.class)).collect(Collectors.toList());
     }
     @ReadOnlyProperty
-    public Optional<AccessoryResponseDTO> findById(Integer id){
-        Optional<Accessory> accessory = accessoryRepository.findById(id);
-        return Optional.ofNullable(modelMapper.map(accessory, AccessoryResponseDTO.class));
+    public Accessory findById(Integer id){
+        return accessoryRepository.findById(id).get();
     }
 
 
