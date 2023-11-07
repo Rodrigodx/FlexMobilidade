@@ -1,5 +1,6 @@
 package com.rodrigo.flexmobilidade.model.reserva.dto;
 
+
 import com.rodrigo.flexmobilidade.model.accessories.Accessory;
 import com.rodrigo.flexmobilidade.model.additionalutility.AdditionalUtility;
 import com.rodrigo.flexmobilidade.model.protections.Protection;
@@ -8,6 +9,7 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 import java.util.List;
+
 @Data
 public class ReservaResponseDTO {
     private Integer id;
@@ -22,7 +24,7 @@ public class ReservaResponseDTO {
 
     private Protection protection;
 
-    private List<Accessory> accessory;
+    private List<Accessory> accessories;
 
-    private List<AdditionalUtility> additionalUtility;
+    private List<AdditionalUtility> additionalUtilities;
 }
