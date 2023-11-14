@@ -1,11 +1,9 @@
 package com.rodrigo.flexmobilidade.services;
 
 import com.rodrigo.flexmobilidade.model.accessories.Accessory;
-import com.rodrigo.flexmobilidade.model.accessories.dto.AccessoryResponseDTO;
 import com.rodrigo.flexmobilidade.model.additionalutility.AdditionalUtility;
-import com.rodrigo.flexmobilidade.model.additionalutility.dto.AdditionalUtilityResponseDTO;
+import com.rodrigo.flexmobilidade.model.categories.Category;
 import com.rodrigo.flexmobilidade.model.protections.Protection;
-import com.rodrigo.flexmobilidade.model.protections.dto.ProtectionResponseDTO;
 import com.rodrigo.flexmobilidade.model.reserva.Reserva;
 import com.rodrigo.flexmobilidade.model.reserva.dto.ReservaRequestDTO;
 import com.rodrigo.flexmobilidade.model.reserva.dto.ReservaResponseDTO;
@@ -16,7 +14,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.data.annotation.ReadOnlyProperty;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -29,19 +26,22 @@ public class ReservaService {
     private final ProtectionService protectionService;
     private final AccessoryService accessoryService;
     private final AdditionalUtilityService additionalUtilityService;
+    private final CategoryService categoryService;
     private final ModelMapper modelMapper = new ModelMapper();
 
     @Transactional
     public ReservaResponseDTO save(ReservaRequestDTO reservaRequestDTO){
-        ProtectionResponseDTO protection = protectionService.findById(reservaRequestDTO.getIdProtection());
-        Protection protection1 = modelMapper.map(protection, Protection.class);
+        Category category = categoryService.findById(reservaRequestDTO.getCategory());
+
+        Protection protection = protectionService.findById(reservaRequestDTO.getProtection());
 
         List<Accessory> accessories = reservaRequestDTO.getAccessories().stream().map(accessory -> accessoryService.findById(accessory.getId())).toList();
         List<AdditionalUtility> additionalUtilities = reservaRequestDTO.getAdditionalUtilities().stream().map(additionalUtility -> additionalUtilityService.findById(additionalUtility.getId())).toList();
 
         Reserva reserva = modelMapper.map(reservaRequestDTO, Reserva.class);
 
-        reserva.setProtection(protection1);
+        reserva.setCategory(category);
+        reserva.setProtection(protection);
         reserva.setAccessories(accessories);
         reserva.setAdditionalUtilities(additionalUtilities);
 

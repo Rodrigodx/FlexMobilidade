@@ -23,7 +23,9 @@ public class ReservaRequestDTO {
 
     private PersonalData personalData;
 
-    private Integer idProtection;
+    private Integer Category;
+
+    private Integer Protection;
 
     private List<AccessoryDTO> accessories = new ArrayList<>();
 

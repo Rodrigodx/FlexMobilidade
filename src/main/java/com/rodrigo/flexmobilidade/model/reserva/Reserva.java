@@ -2,6 +2,7 @@ package com.rodrigo.flexmobilidade.model.reserva;
 
 import com.rodrigo.flexmobilidade.model.accessories.Accessory;
 import com.rodrigo.flexmobilidade.model.additionalutility.AdditionalUtility;
+import com.rodrigo.flexmobilidade.model.categories.Category;
 import com.rodrigo.flexmobilidade.model.protections.Protection;
 import com.rodrigo.flexmobilidade.model.protections.dto.ProtectionResponseDTO;
 import jakarta.persistence.*;
@@ -33,6 +34,9 @@ public class Reserva {
 
     @Embedded
     private PersonalData personalData;
+
+    @OneToOne
+    private Category category;
 
     @OneToOne
     private Protection protection;

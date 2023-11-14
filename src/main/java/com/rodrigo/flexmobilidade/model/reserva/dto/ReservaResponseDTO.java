@@ -3,6 +3,7 @@ package com.rodrigo.flexmobilidade.model.reserva.dto;
 
 import com.rodrigo.flexmobilidade.model.accessories.Accessory;
 import com.rodrigo.flexmobilidade.model.additionalutility.AdditionalUtility;
+import com.rodrigo.flexmobilidade.model.categories.Category;
 import com.rodrigo.flexmobilidade.model.protections.Protection;
 import com.rodrigo.flexmobilidade.model.reserva.PersonalData;
 import lombok.Data;
@@ -21,6 +22,8 @@ public class ReservaResponseDTO {
     private LocalDateTime finish;
 
     private PersonalData personalData;
+
+    private Category category;
 
     private Protection protection;
 

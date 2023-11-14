@@ -1,5 +1,6 @@
 package com.rodrigo.flexmobilidade.controllers;
 
+import com.rodrigo.flexmobilidade.model.protections.Protection;
 import com.rodrigo.flexmobilidade.model.protections.dto.ProtectionRequestDTO;
 import com.rodrigo.flexmobilidade.model.protections.dto.ProtectionResponseDTO;
 import com.rodrigo.flexmobilidade.services.ProtectionService;
@@ -9,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/api/protection")
@@ -26,7 +26,7 @@ public class ProtectionController {
         return ResponseEntity.ok(protectionService.findAll());
     }
     @GetMapping(value = "/id")
-    public ResponseEntity<ProtectionResponseDTO> findById(Integer id){
+    public ResponseEntity<Protection> findById(Integer id){
         return ResponseEntity.ok(protectionService.findById(id));
     }
 }

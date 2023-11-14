@@ -31,9 +31,8 @@ public class ProtectionService {
         return protections.stream().map(protection -> modelMapper.map(protection, ProtectionResponseDTO.class)).collect(Collectors.toList());
     }
     @ReadOnlyProperty
-    public ProtectionResponseDTO findById(Integer id){
-        Protection protection = protectionRepository.findById(id).get();
-        return modelMapper.map(protection, ProtectionResponseDTO.class);
+    public Protection findById(Integer id){
+        return protectionRepository.findById(id).get();
     }
 
 }
