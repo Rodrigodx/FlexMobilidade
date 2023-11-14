@@ -7,7 +7,4 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 @Repository
 public interface CarsRepository extends JpaRepository<Cars, Integer>{
-
-    List<Cars> findByGrupoName(String name);
-
 }

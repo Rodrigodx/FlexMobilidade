@@ -1,6 +1,4 @@
 package com.rodrigo.flexmobilidade.model.cars;
-
-import com.rodrigo.flexmobilidade.model.categories.Grupo;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,9 +15,4 @@ public class Cars {
     private Integer id;
 
     private String model;
-
-    @Embedded
-    @AttributeOverride(name = "name", column = @Column(name = "cars_grupo_name"))
-    private Grupo grupo;
-
 }

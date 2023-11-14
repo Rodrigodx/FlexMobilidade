@@ -21,6 +21,4 @@ public class Accessory {
     private String name;
 
     private Double value;
-
-
 }

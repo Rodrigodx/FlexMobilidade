@@ -1,5 +1,6 @@
 package com.rodrigo.flexmobilidade.controllers;
 
+import com.rodrigo.flexmobilidade.model.cars.Cars;
 import com.rodrigo.flexmobilidade.model.cars.dto.CarsRequestDTO;
 import com.rodrigo.flexmobilidade.model.cars.dto.CarsResponseDTO;
 import com.rodrigo.flexmobilidade.services.CarsService;
@@ -28,13 +29,9 @@ public class CarsController {
     public ResponseEntity<List<CarsResponseDTO>> findAll(){
         return ResponseEntity.ok(carsService.findAll());
     }
-    @Operation(summary = "Mostra todos os carros pertencentes a categoria", method = "GET")
-    @GetMapping(value = "/byGroup")
-    public ResponseEntity<List<CarsResponseDTO>> findByGroupName(@RequestParam String name){
-        return ResponseEntity.ok(carsService.findByGrupoName(name));
-    }
+
     @GetMapping(value = "/id")
-    public ResponseEntity<Optional<CarsResponseDTO>> findById(Integer id){
+    public ResponseEntity<Cars> findById(Integer id){
         return ResponseEntity.ok(carsService.findById(id));
     }
 

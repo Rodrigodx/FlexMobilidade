@@ -10,5 +10,5 @@ public class AdditionalUtilityResponseDTO {
 
     private Double value;
 
-    private Integer quant = 0;
+    private Integer quantity = 0;
 }

@@ -14,7 +14,6 @@ import java.util.List;
 
 @Data
 public class ReservaRequestDTO {
-    private Integer id;
 
     private String location;
 

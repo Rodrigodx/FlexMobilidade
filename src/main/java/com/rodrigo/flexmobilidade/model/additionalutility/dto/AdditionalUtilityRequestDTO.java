@@ -4,11 +4,10 @@ import lombok.Data;
 
 @Data
 public class AdditionalUtilityRequestDTO {
-    private Integer id;
 
     private String name;
 
     private Double value;
 
-    private Integer quant = 0;
+    private Integer quantity = 0;
 }

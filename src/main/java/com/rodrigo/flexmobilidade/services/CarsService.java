@@ -30,14 +30,8 @@ public class CarsService {
         return carsList.stream().map(cars -> modelMapper.map(cars, CarsResponseDTO.class)).collect(Collectors.toList());
     }
     @ReadOnlyProperty
-    public List<CarsResponseDTO> findByGrupoName(String name){
-        List<Cars> carsList = carsRepository.findByGrupoName(name);
-        return carsList.stream().map(cars -> modelMapper.map(cars, CarsResponseDTO.class)).collect(Collectors.toList());
-    }
-    @ReadOnlyProperty
-    public Optional<CarsResponseDTO> findById(Integer id){
-        Optional<Cars> cars = carsRepository.findById(id);
-        return Optional.ofNullable(modelMapper.map(cars, CarsResponseDTO.class));
+    public Cars findById(Integer id){
+        return carsRepository.findById(id).get();
     }
 
 }
