@@ -35,17 +35,17 @@ public class Reserva {
     @Embedded
     private PersonalData personalData;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Category category;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Protection protection;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "reserva_accessories")
     private List<Accessory> accessories = new ArrayList<>();
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "reserva_utilities")
     private List<AdditionalUtility> additionalUtilities = new ArrayList<>();
 }

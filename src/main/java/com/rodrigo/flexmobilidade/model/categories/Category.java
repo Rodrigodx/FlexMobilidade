@@ -3,7 +3,6 @@ package com.rodrigo.flexmobilidade.model.categories;
 
 import com.rodrigo.flexmobilidade.model.cars.Cars;
 import jakarta.persistence.*;
-import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,7 +22,7 @@ public class Category {
 
     private String name;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "categories_cars")
     private List<Cars> carsList;
 }
