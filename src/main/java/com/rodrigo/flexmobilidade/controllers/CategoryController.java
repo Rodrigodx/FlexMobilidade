@@ -2,6 +2,7 @@ package com.rodrigo.flexmobilidade.controllers;
 
 
 import com.rodrigo.flexmobilidade.model.categories.Category;
+import com.rodrigo.flexmobilidade.model.categories.dto.CategoryCarsRequestDTO;
 import com.rodrigo.flexmobilidade.model.categories.dto.CategoryRequestDTO;
 import com.rodrigo.flexmobilidade.model.categories.dto.CategoryResponseDTO;
 import com.rodrigo.flexmobilidade.services.CategoryService;
@@ -22,13 +23,17 @@ public class CategoryController {
     public ResponseEntity<CategoryResponseDTO> save(@RequestBody CategoryRequestDTO categoryRequestDTO){
         return new ResponseEntity<>(categoryService.save(categoryRequestDTO), HttpStatus.CREATED);
     }
+    @PatchMapping(value = "/{id}")
+    public ResponseEntity<CategoryResponseDTO> addCars(@RequestBody CategoryCarsRequestDTO categoryCarsRequestDTO, @PathVariable Integer id){
+        return ResponseEntity.ok(categoryService.addCars(categoryCarsRequestDTO, id));
+    }
     @GetMapping
     public ResponseEntity<List<CategoryResponseDTO>> findAll(){
         return ResponseEntity.ok(categoryService.findAll());
     }
 
-    @GetMapping(value = "/id")
-    public ResponseEntity<Category> findById(Integer id){
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<Category> findById(@PathVariable Integer id){
         return ResponseEntity.ok(categoryService.findById(id));
     }
 

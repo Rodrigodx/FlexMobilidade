@@ -2,6 +2,7 @@ package com.rodrigo.flexmobilidade.services;
 
 import com.rodrigo.flexmobilidade.model.cars.Cars;
 import com.rodrigo.flexmobilidade.model.categories.Category;
+import com.rodrigo.flexmobilidade.model.categories.dto.CategoryCarsRequestDTO;
 import com.rodrigo.flexmobilidade.model.categories.dto.CategoryRequestDTO;
 import com.rodrigo.flexmobilidade.model.categories.dto.CategoryResponseDTO;
 import com.rodrigo.flexmobilidade.repositories.CategoryRepository;
@@ -12,6 +13,7 @@ import org.springframework.data.annotation.ReadOnlyProperty;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -23,14 +25,28 @@ public class CategoryService {
     private final ModelMapper modelMapper = new ModelMapper();
     @Transactional
     public CategoryResponseDTO save(CategoryRequestDTO categoryRequestDTO){
+        Category category = categoryRepository.save(modelMapper.map(categoryRequestDTO, Category.class));
+        return modelMapper.map(category, CategoryResponseDTO.class);
+    }
+    @Transactional
+    public CategoryResponseDTO addCars(CategoryCarsRequestDTO categoryCarsRequestDTO, Integer id){
+        List<Cars> carsList = categoryCarsRequestDTO.getCarsList().stream().map(carsDTO -> carsService.findById(carsDTO.getId())).toList();
 
-        List<Cars> carsList = categoryRequestDTO.getCarsList().stream().map(carsDTO -> carsService.findById(carsDTO.getId())).toList();
+        System.out.println(carsList);
 
-        Category category = modelMapper.map(categoryRequestDTO, Category.class);
 
-        category.setCarsList(carsList);
+        Optional<Category> existingCategoryOptional = categoryRepository.findById(id);
 
-        categoryRepository.save(category);
+        Category category = modelMapper.map(categoryCarsRequestDTO, Category.class);
+
+        if (existingCategoryOptional.isPresent()) {
+            Category existingCategory = existingCategoryOptional.get();
+            String categoryName = existingCategory.getName();
+            category.setId(id);
+            category.setName(categoryName);
+            category.setCarsList(carsList);
+            categoryRepository.save(category);
+        }
 
         return modelMapper.map(category, CategoryResponseDTO.class);
     }
