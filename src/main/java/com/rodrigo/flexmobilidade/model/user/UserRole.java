@@ -1,8 +1,8 @@
 package com.rodrigo.flexmobilidade.model.user;
 
-import lombok.Data;
+import lombok.Getter;
 
-@Data
+@Getter
 public enum UserRole {
 
     ADMIN("admin"),
