@@ -23,7 +23,7 @@ public class JWTServiceImpl {
                 .compact();
     }
 
-    public String extractedUserName(String token){
+    public String extractUserName(String token){
         return extractCLaim(token, Claims::getSubject);
     }
 
@@ -39,6 +39,15 @@ public class JWTServiceImpl {
 
     private Claims extractAllCLaims(String token) {
         return Jwts.parser().setSigningKey(getSingKey()).build().parseClaimsJws(token).getBody();
+    }
+
+    public boolean isTokenValid(String token, UserDetails userDetails){
+        final String username = extractUserName(token);
+        return (username.equals(userDetails.getUsername())) && !istokenExpired(token);
+    }
+
+    private boolean istokenExpired(String token) {
+        return extractCLaim(token, Claims::getExpiration).before(new Date());
     }
 
 }
