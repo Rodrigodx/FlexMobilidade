@@ -1,6 +1,7 @@
 package com.rodrigo.flexmobilidade.infra.security;
 
 import com.rodrigo.flexmobilidade.services.JWTService;
+import com.rodrigo.flexmobilidade.services.impl.JWTServiceImpl;
 import com.rodrigo.flexmobilidade.services.impl.UserServiceImpl;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -22,7 +23,7 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class JWTAuthenticationFilter extends OncePerRequestFilter {
 
-    private final JWTService jwtService;
+    private final JWTServiceImpl jwtService;
     private final UserServiceImpl userService;
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -35,7 +36,7 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
             return;
         }
         jwt = authHeader.substring(7);
-        userEmail = jwtService.extracUserName(jwt);
+        userEmail = jwtService.extractUserName(jwt);
 
         if (StringUtils.isNotEmpty(userEmail) && SecurityContextHolder.getContext().getAuthentication() == null){
             UserDetails userDetails = userService.loadUserByUsername(userEmail);
