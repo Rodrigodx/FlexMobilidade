@@ -13,25 +13,25 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @SpringBootApplication
 @OpenAPIDefinition(info = @Info(title = "Flex Mobilidade", version = "1", description = "API desenvolvida para locação de veículos"))
-public class FlexMobilidadeApplication implements CommandLineRunner {
+public class FlexMobilidadeApplication{
 
 
-	@Autowired
-	private UserRepository userRepository;
+	/*@Autowired
+	private UserRepository userRepository;*/
 
 	public static void main(String[] args) {
 		SpringApplication.run(FlexMobilidadeApplication.class, args);
 	}
 
-	public void run(String... args) throws Exception {
+	/*public void run(String... args) throws Exception {
 		User adminAccount = userRepository.findByRole(UserRole.ADMIN);
-		if (null == adminAccount) {
+		if (adminAccount == null) {
 			User user = new User();
 			user.setEmail("admin@gmail.com");
 			user.setName("rodrigo");
 			user.setRole(UserRole.ADMIN);
 			user.setPassword(new BCryptPasswordEncoder().encode("admin"));
 			userRepository.save(user);
-		}
-	}
+		}*/
+
 }
