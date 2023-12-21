@@ -6,7 +6,6 @@ import com.rodrigo.flexmobilidade.model.user.UserRole;
 import com.rodrigo.flexmobilidade.model.user.dto.UsersDto;
 import com.rodrigo.flexmobilidade.repositories.UserRepository;
 import com.rodrigo.flexmobilidade.services.UserService;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -15,7 +14,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 public class UserServiceImpl implements UserService {

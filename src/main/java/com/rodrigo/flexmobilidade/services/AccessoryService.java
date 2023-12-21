@@ -1,7 +1,6 @@
 package com.rodrigo.flexmobilidade.services;
 
 import com.rodrigo.flexmobilidade.model.accessories.Accessory;
-import com.rodrigo.flexmobilidade.model.accessories.dto.AccessoryDTO;
 import com.rodrigo.flexmobilidade.model.accessories.dto.AccessoryRequestDTO;
 import com.rodrigo.flexmobilidade.model.accessories.dto.AccessoryResponseDTO;
 import com.rodrigo.flexmobilidade.repositories.AccessoryRepository;
@@ -12,7 +11,6 @@ import org.springframework.data.annotation.ReadOnlyProperty;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service

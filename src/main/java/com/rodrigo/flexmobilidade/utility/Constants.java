@@ -7,6 +7,8 @@ public class Constants implements Serializable {
     /** The Constant SUCCESS_CODE. */
     public static final String SUCCESS_CODE = "200";
     /** The Constant ERROR_CODE. */
+    public static final String CREATED = "201";
+    /** The Constant ERROR_CODE. */
     public static final String ERROR_CODE = "400";
     /** The Constant ERROR_CODE. */
     public static final String NEW_USER = "New user registration Completed";

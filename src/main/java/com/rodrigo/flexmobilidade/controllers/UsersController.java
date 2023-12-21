@@ -15,33 +15,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
-/**
- * @author swapnil.mane
- *
- */
 @RestController
 public class UsersController {
 
-	/**
-	 * New USER_REGISTRATION.
-	 */
 	private static final String USER_REGISTRATION = "/user/registration";
-	
-	/**
-	 *  USER_LOGIN.
-	 */
 	private static final String USER_LOGIN = "/user/login";
-	
-	/**
-	 *  GET_ALL_USERS from db.
-	 */
 
 	@Autowired
 	private UserService userService;
@@ -59,7 +41,7 @@ public class UsersController {
 		UsersDto returnData = this.userService.newUserRegistration(usersDto);
 		data.setData(returnData);
 		data.setMessage(Constants.NEW_USER);
-		data.setStatusCode(Constants.SUCCESS_CODE);
+		data.setStatusCode(Constants.CREATED);
 		return new ResponseEntity<ReturnData>(data, HttpStatus.CREATED);
 	}
 
