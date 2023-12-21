@@ -1,8 +1,10 @@
 package com.rodrigo.flexmobilidade.infra.security;
 
+import com.rodrigo.flexmobilidade.model.user.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -22,22 +24,21 @@ public class UsersSecurityConfig {
 	
 	@Autowired
 	private JwtAuthFilter jwtAuthFilter;
-
 	@Bean
     //authentication
     public UserDetailsService userDetailsService() {
         return new UserInfoUserDetailsService();
     }
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf().disable()
-                .authorizeHttpRequests()
-                .requestMatchers("/user/registration", "/user/login", "/authenticate").permitAll()
-                .and()
-                .authorizeHttpRequests().requestMatchers("/**")
-                .authenticated()
-                .and()
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/user/registration", "/user/login", "/authenticate").permitAll()
+                        .requestMatchers("/api/protection").hasRole("ADMIN")
+                        .requestMatchers("/api/accessory").hasRole("ADMIN")
+                        .requestMatchers("/api/cars").hasRole("ADMIN")
+                        .requestMatchers("/api/category").hasRole("ADMIN")
+                        .anyRequest().authenticated())
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
