@@ -1,7 +1,7 @@
 package com.rodrigo.flexmobilidade.infra.security;
 
 
-import com.rodrigo.flexmobilidade.model.user.User;
+import com.rodrigo.flexmobilidade.model.user.Users;
 import com.rodrigo.flexmobilidade.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,7 +17,7 @@ public class UserInfoUserDetailsService implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		User orElseThrow = this.userRepository.findByEmail(username).orElseThrow(()->new UsernameNotFoundException(username +" Not Found "));
+		Users orElseThrow = this.userRepository.findByEmail(username).orElseThrow(()->new UsernameNotFoundException(username +" Not Found "));
 		return orElseThrow;
 	}
 	

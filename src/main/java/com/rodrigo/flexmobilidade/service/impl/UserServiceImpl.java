@@ -1,7 +1,7 @@
 package com.rodrigo.flexmobilidade.service.impl;
 
 import com.rodrigo.flexmobilidade.exceptions.UserPresentException;
-import com.rodrigo.flexmobilidade.model.user.User;
+import com.rodrigo.flexmobilidade.model.user.Users;
 import com.rodrigo.flexmobilidade.model.user.UserRole;
 import com.rodrigo.flexmobilidade.model.user.dto.UsersDto;
 import com.rodrigo.flexmobilidade.repositories.UserRepository;
@@ -30,9 +30,9 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UsersDto newUserRegistration(UsersDto usersDto) throws UserPresentException {
 		
-		Optional<User> findByEmailAddress = userRepository.findByEmail(usersDto.getEmail());
+		Optional<Users> findByEmailAddress = userRepository.findByEmail(usersDto.getEmail());
 		if(!findByEmailAddress.isPresent()) {
-		User user = new User();
+		Users user = new Users();
 		user.setName(usersDto.getName());
 		user.setEmail(usersDto.getEmail());
 		user.setPassword(this.passwordEncoder.encode(usersDto.getPassword()));

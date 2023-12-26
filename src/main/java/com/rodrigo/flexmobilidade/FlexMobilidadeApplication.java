@@ -1,6 +1,6 @@
 package com.rodrigo.flexmobilidade;
 
-import com.rodrigo.flexmobilidade.model.user.User;
+import com.rodrigo.flexmobilidade.model.user.Users;
 import com.rodrigo.flexmobilidade.model.user.UserRole;
 import com.rodrigo.flexmobilidade.repositories.UserRepository;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
@@ -24,9 +24,9 @@ public class FlexMobilidadeApplication implements CommandLineRunner {
 	}
 
 	public void run(String... args) throws Exception {
-		User adminAccount = userRepository.findByRole(UserRole.ADMIN);
+		Users adminAccount = userRepository.findByRole(UserRole.ADMIN);
 		if (adminAccount == null) {
-			User user = new User();
+			Users user = new Users();
 			user.setEmail("admin@gmail.com");
 			user.setName("rodrigo");
 			user.setRole(UserRole.ADMIN);

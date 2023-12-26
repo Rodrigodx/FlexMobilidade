@@ -1,14 +1,14 @@
 package com.rodrigo.flexmobilidade.repositories;
 
-import com.rodrigo.flexmobilidade.model.user.User;
+import com.rodrigo.flexmobilidade.model.user.Users;
 import com.rodrigo.flexmobilidade.model.user.UserRole;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 
 import java.util.Optional;
 
-public interface UserRepository extends JpaRepository<User, String> {
-    Optional<User> findByEmail(String email);
+public interface UserRepository extends JpaRepository<Users, String> {
+    Optional<Users> findByEmail(String email);
 
-    User findByRole(UserRole userRole);
+    Users findByRole(UserRole userRole);
 }
