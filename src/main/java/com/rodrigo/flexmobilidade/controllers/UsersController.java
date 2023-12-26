@@ -7,7 +7,7 @@ import com.rodrigo.flexmobilidade.infra.security.JwtAuthResponse;
 import com.rodrigo.flexmobilidade.infra.security.JwtService;
 import com.rodrigo.flexmobilidade.infra.security.UserInfoUserDetailsService;
 import com.rodrigo.flexmobilidade.model.ReturnData;
-import com.rodrigo.flexmobilidade.model.user.dto.UsersDto;
+import com.rodrigo.flexmobilidade.dto.user.UsersDto;
 import com.rodrigo.flexmobilidade.services.UserService;
 import com.rodrigo.flexmobilidade.utility.Constants;
 import jakarta.validation.Valid;

@@ -4,7 +4,6 @@ import com.rodrigo.flexmobilidade.model.accessories.Accessory;
 import com.rodrigo.flexmobilidade.model.additionalutility.AdditionalUtility;
 import com.rodrigo.flexmobilidade.model.categories.Category;
 import com.rodrigo.flexmobilidade.model.protections.Protection;
-import com.rodrigo.flexmobilidade.model.protections.dto.ProtectionResponseDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

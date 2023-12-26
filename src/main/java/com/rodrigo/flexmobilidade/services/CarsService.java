@@ -1,7 +1,7 @@
 package com.rodrigo.flexmobilidade.services;
 
-import com.rodrigo.flexmobilidade.model.cars.dto.CarsRequestDTO;
-import com.rodrigo.flexmobilidade.model.cars.dto.CarsResponseDTO;
+import com.rodrigo.flexmobilidade.dto.cars.CarsRequestDTO;
+import com.rodrigo.flexmobilidade.dto.cars.CarsResponseDTO;
 import com.rodrigo.flexmobilidade.model.cars.Cars;
 import com.rodrigo.flexmobilidade.repositories.CarsRepository;
 import jakarta.transaction.Transactional;

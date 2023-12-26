@@ -1,4 +1,4 @@
-package com.rodrigo.flexmobilidade.model.user.dto;
+package com.rodrigo.flexmobilidade.dto.user;
 
 
 

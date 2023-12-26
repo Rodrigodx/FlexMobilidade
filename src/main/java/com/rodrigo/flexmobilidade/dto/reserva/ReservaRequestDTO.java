@@ -1,10 +1,7 @@
-package com.rodrigo.flexmobilidade.model.reserva.dto;
+package com.rodrigo.flexmobilidade.dto.reserva;
 
-import com.rodrigo.flexmobilidade.model.accessories.Accessory;
-import com.rodrigo.flexmobilidade.model.accessories.dto.AccessoryDTO;
-import com.rodrigo.flexmobilidade.model.additionalutility.AdditionalUtility;
-import com.rodrigo.flexmobilidade.model.additionalutility.dto.AdditionalUtilityDTO;
-import com.rodrigo.flexmobilidade.model.protections.Protection;
+import com.rodrigo.flexmobilidade.dto.accessories.AccessoryDTO;
+import com.rodrigo.flexmobilidade.dto.additonalutility.AdditionalUtilityDTO;
 import com.rodrigo.flexmobilidade.model.reserva.PersonalData;
 import lombok.Data;
 

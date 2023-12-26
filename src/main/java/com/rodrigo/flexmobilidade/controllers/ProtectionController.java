@@ -1,8 +1,8 @@
 package com.rodrigo.flexmobilidade.controllers;
 
 import com.rodrigo.flexmobilidade.model.protections.Protection;
-import com.rodrigo.flexmobilidade.model.protections.dto.ProtectionRequestDTO;
-import com.rodrigo.flexmobilidade.model.protections.dto.ProtectionResponseDTO;
+import com.rodrigo.flexmobilidade.dto.protections.ProtectionRequestDTO;
+import com.rodrigo.flexmobilidade.dto.protections.ProtectionResponseDTO;
 import com.rodrigo.flexmobilidade.services.ProtectionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

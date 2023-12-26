@@ -1,4 +1,4 @@
-package com.rodrigo.flexmobilidade.model.protections.dto;
+package com.rodrigo.flexmobilidade.dto.protections;
 
 import lombok.Data;
 

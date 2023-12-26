@@ -1,8 +1,8 @@
 package com.rodrigo.flexmobilidade.controllers;
 
 import com.rodrigo.flexmobilidade.model.cars.Cars;
-import com.rodrigo.flexmobilidade.model.cars.dto.CarsRequestDTO;
-import com.rodrigo.flexmobilidade.model.cars.dto.CarsResponseDTO;
+import com.rodrigo.flexmobilidade.dto.cars.CarsRequestDTO;
+import com.rodrigo.flexmobilidade.dto.cars.CarsResponseDTO;
 import com.rodrigo.flexmobilidade.services.CarsService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
@@ -11,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/api/cars", produces = {"application/json"})

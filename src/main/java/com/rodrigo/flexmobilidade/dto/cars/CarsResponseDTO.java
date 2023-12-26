@@ -1,4 +1,4 @@
-package com.rodrigo.flexmobilidade.model.cars.dto;
+package com.rodrigo.flexmobilidade.dto.cars;
 
 import lombok.Data;
 

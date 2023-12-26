@@ -1,4 +1,4 @@
-package com.rodrigo.flexmobilidade.model.categories.dto;
+package com.rodrigo.flexmobilidade.dto.categories;
 
 import com.rodrigo.flexmobilidade.model.cars.Cars;
 import lombok.Data;

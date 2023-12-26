@@ -1,7 +1,7 @@
 package com.rodrigo.flexmobilidade.controllers;
 
-import com.rodrigo.flexmobilidade.model.reserva.dto.ReservaRequestDTO;
-import com.rodrigo.flexmobilidade.model.reserva.dto.ReservaResponseDTO;
+import com.rodrigo.flexmobilidade.dto.reserva.ReservaRequestDTO;
+import com.rodrigo.flexmobilidade.dto.reserva.ReservaResponseDTO;
 import com.rodrigo.flexmobilidade.services.ReservaService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;

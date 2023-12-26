@@ -1,4 +1,4 @@
-package com.rodrigo.flexmobilidade.model.reserva.dto;
+package com.rodrigo.flexmobilidade.dto.reserva;
 
 
 import com.rodrigo.flexmobilidade.model.accessories.Accessory;

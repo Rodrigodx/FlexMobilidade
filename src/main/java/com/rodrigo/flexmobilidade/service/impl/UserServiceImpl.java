@@ -3,7 +3,7 @@ package com.rodrigo.flexmobilidade.service.impl;
 import com.rodrigo.flexmobilidade.exceptions.UserPresentException;
 import com.rodrigo.flexmobilidade.model.user.Users;
 import com.rodrigo.flexmobilidade.model.user.UserRole;
-import com.rodrigo.flexmobilidade.model.user.dto.UsersDto;
+import com.rodrigo.flexmobilidade.dto.user.UsersDto;
 import com.rodrigo.flexmobilidade.repositories.UserRepository;
 import com.rodrigo.flexmobilidade.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

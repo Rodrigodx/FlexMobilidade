@@ -1,8 +1,8 @@
 package com.rodrigo.flexmobilidade.services;
 
 import com.rodrigo.flexmobilidade.model.additionalutility.AdditionalUtility;
-import com.rodrigo.flexmobilidade.model.additionalutility.dto.AdditionalUtilityRequestDTO;
-import com.rodrigo.flexmobilidade.model.additionalutility.dto.AdditionalUtilityResponseDTO;
+import com.rodrigo.flexmobilidade.dto.additonalutility.AdditionalUtilityRequestDTO;
+import com.rodrigo.flexmobilidade.dto.additonalutility.AdditionalUtilityResponseDTO;
 import com.rodrigo.flexmobilidade.repositories.AdditionalUtilityRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;

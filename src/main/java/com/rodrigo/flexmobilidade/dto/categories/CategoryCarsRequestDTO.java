@@ -1,6 +1,6 @@
-package com.rodrigo.flexmobilidade.model.categories.dto;
+package com.rodrigo.flexmobilidade.dto.categories;
 
-import com.rodrigo.flexmobilidade.model.cars.dto.CarsDTO;
+import com.rodrigo.flexmobilidade.dto.cars.CarsDTO;
 import lombok.Data;
 
 import java.util.ArrayList;

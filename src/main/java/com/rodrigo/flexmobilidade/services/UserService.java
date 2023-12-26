@@ -2,7 +2,7 @@ package com.rodrigo.flexmobilidade.services;
 
 
 import com.rodrigo.flexmobilidade.exceptions.UserPresentException;
-import com.rodrigo.flexmobilidade.model.user.dto.UsersDto;
+import com.rodrigo.flexmobilidade.dto.user.UsersDto;
 
 
 public interface UserService {

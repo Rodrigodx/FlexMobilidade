@@ -1,8 +1,8 @@
 package com.rodrigo.flexmobilidade.services;
 
 import com.rodrigo.flexmobilidade.model.protections.Protection;
-import com.rodrigo.flexmobilidade.model.protections.dto.ProtectionRequestDTO;
-import com.rodrigo.flexmobilidade.model.protections.dto.ProtectionResponseDTO;
+import com.rodrigo.flexmobilidade.dto.protections.ProtectionRequestDTO;
+import com.rodrigo.flexmobilidade.dto.protections.ProtectionResponseDTO;
 import com.rodrigo.flexmobilidade.repositories.ProtectionRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;

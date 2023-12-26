@@ -2,9 +2,9 @@ package com.rodrigo.flexmobilidade.services;
 
 import com.rodrigo.flexmobilidade.model.cars.Cars;
 import com.rodrigo.flexmobilidade.model.categories.Category;
-import com.rodrigo.flexmobilidade.model.categories.dto.CategoryCarsRequestDTO;
-import com.rodrigo.flexmobilidade.model.categories.dto.CategoryRequestDTO;
-import com.rodrigo.flexmobilidade.model.categories.dto.CategoryResponseDTO;
+import com.rodrigo.flexmobilidade.dto.categories.CategoryCarsRequestDTO;
+import com.rodrigo.flexmobilidade.dto.categories.CategoryRequestDTO;
+import com.rodrigo.flexmobilidade.dto.categories.CategoryResponseDTO;
 import com.rodrigo.flexmobilidade.repositories.CategoryRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
