@@ -1,9 +1,6 @@
 package com.rodrigo.flexmobilidade.model.additionalutility;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,6 +17,7 @@ public class AdditionalUtility {
 
     private String name;
 
+    @Column(name = "value_column")
     private Double value;
 
     private Integer quantity = 0;
