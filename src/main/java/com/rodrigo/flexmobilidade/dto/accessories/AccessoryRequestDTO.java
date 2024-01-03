@@ -9,4 +9,8 @@ public class AccessoryRequestDTO {
 
     private Double value;
 
+    public AccessoryRequestDTO(String name, double value) {
+        this.name = name;
+        this.value = value;
+    }
 }
