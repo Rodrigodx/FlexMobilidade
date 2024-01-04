@@ -34,5 +34,9 @@ public class AccessoryService {
         return accessoryRepository.findById(id).get();
     }
 
+    @Transactional
+    public void delete(Integer id){
+        accessoryRepository.deleteById(id);
+    }
 
 }
