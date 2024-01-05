@@ -17,7 +17,7 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 class AccessoryServiceTest {
 
@@ -98,8 +98,34 @@ class AccessoryServiceTest {
             service.update(accessoryRequestDTO, ID);
         }catch (NoSuchElementException e){
             assertEquals(NoSuchElementException.class, e.getClass());
-            assertEquals("Accessory not found", e.getMessage());
+            assertEquals("Accessory with ID:" + ID + " not found", e.getMessage());
         }
+    }
+
+    @Test
+    void deleteWithSuccess(){
+        when(accessoryRepository.findById(anyInt())).thenReturn(Optional.ofNullable(accessory));
+        doNothing().when(accessoryRepository).deleteById(anyInt());
+
+        service.delete(ID);
+
+        verify(accessoryRepository, times(1)).deleteById(eq(ID));
+        assertEquals(ID, accessory.getId());
+    }
+
+    @Test
+    void deleteWithNotSuccess(){
+        when(accessoryRepository.findById(anyInt())).thenThrow(new NoSuchElementException("Accessory with ID:" + ID + " not found"));
+
+        try {
+
+            service.delete(ID);
+
+        }catch (NoSuchElementException e){
+            assertEquals(NoSuchElementException.class, e.getClass());
+            assertEquals("Accessory with ID:" + ID + " not found", e.getMessage());
+        }
+
     }
 
     private void startAccessory(){

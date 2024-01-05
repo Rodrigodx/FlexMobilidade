@@ -6,6 +6,7 @@ import com.rodrigo.flexmobilidade.dto.accessories.AccessoryResponseDTO;
 import com.rodrigo.flexmobilidade.repositories.AccessoryRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.annotation.ReadOnlyProperty;
 import org.springframework.stereotype.Service;
@@ -38,7 +39,12 @@ public class AccessoryService {
 
     @Transactional
     public void delete(Integer id){
-        accessoryRepository.deleteById(id);
+        Optional<Accessory> accessory = Optional.ofNullable(findById(id));
+        if (accessory.isPresent()){
+            accessoryRepository.deleteById(id);
+        }else {
+            throw new NoSuchElementException("Accessory with ID:" + id + " not found");
+        }
     }
     @Transactional
     public AccessoryResponseDTO update(AccessoryRequestDTO accessoryRequestDTO, Integer id) throws IllegalArgumentException {
@@ -54,8 +60,7 @@ public class AccessoryService {
             return modelMapper.map(updatedAccessory, AccessoryResponseDTO.class);
         }
 
-        throw new NoSuchElementException("Accessory not found");
-    }
+        throw new NoSuchElementException("Accessory with ID:" + id + " not found");    }
 }
 
 
