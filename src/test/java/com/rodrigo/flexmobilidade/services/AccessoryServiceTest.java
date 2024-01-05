@@ -92,11 +92,11 @@ class AccessoryServiceTest {
     }
     @Test
     void whenUpdateThenReturnNoSushElementException(){
-        when(accessoryRepository.findById(anyInt())).thenThrow(new NoSuchElementException("Accessory not found"));
+        when(accessoryRepository.findById(anyInt())).thenReturn(Optional.empty());
 
         try{
-            service.findById(ID);
-        }catch (Exception e){
+            service.update(accessoryRequestDTO, ID);
+        }catch (NoSuchElementException e){
             assertEquals(NoSuchElementException.class, e.getClass());
             assertEquals("Accessory not found", e.getMessage());
         }

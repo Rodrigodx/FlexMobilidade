@@ -52,11 +52,9 @@ public class AccessoryService {
             Accessory updatedAccessory = accessoryRepository.save(accessory);
 
             return modelMapper.map(updatedAccessory, AccessoryResponseDTO.class);
-
         }
 
-        else throw new NoSuchElementException("Accessory not found");
-
+        throw new NoSuchElementException("Accessory not found");
     }
 }
 
