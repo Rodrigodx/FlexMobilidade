@@ -11,6 +11,7 @@ import org.springframework.data.annotation.ReadOnlyProperty;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -39,4 +40,13 @@ public class AccessoryService {
         accessoryRepository.deleteById(id);
     }
 
+    @Transactional
+    public AccessoryResponseDTO update(AccessoryRequestDTO accessoryRequestDTO, Integer id) {
+        if (accessoryRepository.findById(id).isPresent()) {
+            Accessory accessory = accessoryRepository.save(modelMapper.map(accessoryRequestDTO, Accessory.class));
+            return modelMapper.map(accessory, AccessoryResponseDTO.class);
+        }
+        return null;
+    }
 }
+

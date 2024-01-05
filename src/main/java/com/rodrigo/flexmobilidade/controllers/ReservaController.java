@@ -4,6 +4,7 @@ import com.rodrigo.flexmobilidade.dto.reserva.ReservaRequestDTO;
 import com.rodrigo.flexmobilidade.dto.reserva.ReservaResponseDTO;
 import com.rodrigo.flexmobilidade.services.ReservaService;
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,15 +21,15 @@ public class ReservaController {
     private final ReservaService reservaService;
     @Operation(summary = " um Categoria de carros", method = "POST")
     @PostMapping
-    public ResponseEntity<ReservaResponseDTO> save(@RequestBody ReservaRequestDTO reservaRequestDTO){
+    public ResponseEntity<ReservaResponseDTO> save(@RequestBody @Valid ReservaRequestDTO reservaRequestDTO){
         return new ResponseEntity<>(reservaService.save(reservaRequestDTO), HttpStatus.CREATED);
     }
     @GetMapping
     public ResponseEntity<List<ReservaResponseDTO>> findAll(){
         return ResponseEntity.ok(reservaService.findAll());
     }
-    @GetMapping(value = "/id")
-    public ResponseEntity<Optional<ReservaResponseDTO>> findById(Integer id){
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<Optional<ReservaResponseDTO>> findById(@PathVariable Integer id){
         return ResponseEntity.ok(reservaService.findById(id));
     }
 

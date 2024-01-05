@@ -4,6 +4,7 @@ import com.rodrigo.flexmobilidade.model.protections.Protection;
 import com.rodrigo.flexmobilidade.dto.protections.ProtectionRequestDTO;
 import com.rodrigo.flexmobilidade.dto.protections.ProtectionResponseDTO;
 import com.rodrigo.flexmobilidade.services.ProtectionService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,15 +19,15 @@ public class ProtectionController {
 
     private final ProtectionService protectionService;
     @PostMapping
-    public ResponseEntity<ProtectionResponseDTO> save(@RequestBody ProtectionRequestDTO protection){
+    public ResponseEntity<ProtectionResponseDTO> save(@RequestBody @Valid ProtectionRequestDTO protection){
         return new ResponseEntity<>(protectionService.save(protection), HttpStatus.CREATED);
     }
     @GetMapping
     public ResponseEntity<List<ProtectionResponseDTO>> findAll(){
         return ResponseEntity.ok(protectionService.findAll());
     }
-    @GetMapping(value = "/id")
-    public ResponseEntity<Protection> findById(Integer id){
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<Protection> findById(@PathVariable Integer id){
         return ResponseEntity.ok(protectionService.findById(id));
     }
 }
