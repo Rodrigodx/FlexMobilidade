@@ -11,6 +11,7 @@ import org.springframework.data.annotation.ReadOnlyProperty;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -39,14 +40,23 @@ public class AccessoryService {
     public void delete(Integer id){
         accessoryRepository.deleteById(id);
     }
-
     @Transactional
     public AccessoryResponseDTO update(AccessoryRequestDTO accessoryRequestDTO, Integer id) {
-        if (accessoryRepository.findById(id).isPresent()) {
-            Accessory accessory = accessoryRepository.save(modelMapper.map(accessoryRequestDTO, Accessory.class));
-            return modelMapper.map(accessory, AccessoryResponseDTO.class);
+        Optional<Accessory> optionalAccessory = accessoryRepository.findById(id);
+        if (optionalAccessory.isPresent()) {
+            Accessory accessory = optionalAccessory.get();
+
+            accessory.setName(accessoryRequestDTO.getName());
+            accessory.setValues(accessoryRequestDTO.getValues());
+
+            Accessory updatedAccessory = accessoryRepository.save(accessory);
+
+            return modelMapper.map(updatedAccessory, AccessoryResponseDTO.class);
+
+        } else {
+            throw new NoSuchElementException("Accessory with ID " + id + " not found");
         }
-        return null;
     }
 }
+
 

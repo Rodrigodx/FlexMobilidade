@@ -38,10 +38,9 @@ public class AccessoryController {
         return ResponseEntity.noContent().build();
     }
 
-    @PutMapping(value = "/id")
+    @PutMapping(value = "/{id}")
     public ResponseEntity<AccessoryResponseDTO> update(@RequestBody AccessoryRequestDTO accessoryRequestDTO, @PathVariable Integer id){
-        accessoryService.update(accessoryRequestDTO, id);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(accessoryService.update(accessoryRequestDTO, id));
     }
 
 }
