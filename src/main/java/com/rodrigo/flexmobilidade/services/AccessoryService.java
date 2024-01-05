@@ -41,7 +41,7 @@ public class AccessoryService {
         accessoryRepository.deleteById(id);
     }
     @Transactional
-    public AccessoryResponseDTO update(AccessoryRequestDTO accessoryRequestDTO, Integer id) {
+    public AccessoryResponseDTO update(AccessoryRequestDTO accessoryRequestDTO, Integer id) throws IllegalArgumentException {
         Optional<Accessory> optionalAccessory = accessoryRepository.findById(id);
         if (optionalAccessory.isPresent()) {
             Accessory accessory = optionalAccessory.get();
@@ -53,9 +53,10 @@ public class AccessoryService {
 
             return modelMapper.map(updatedAccessory, AccessoryResponseDTO.class);
 
-        } else {
-            throw new NoSuchElementException("Accessory with ID " + id + " not found");
         }
+
+        else throw new NoSuchElementException("Accessory not found");
+
     }
 }
 

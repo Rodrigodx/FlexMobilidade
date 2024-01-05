@@ -9,11 +9,10 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.modelmapper.ModelMapper;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -31,32 +30,27 @@ class AccessoryServiceTest {
     private AccessoryService service;
     @Mock
     private AccessoryRepository accessoryRepository;
-    @Mock
-    private ModelMapper modelMapper = new ModelMapper();
 
     private AccessoryRequestDTO accessoryRequestDTO;
     private AccessoryResponseDTO accessoryResponseDTO;
     private Accessory accessory;
-
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
         startAccessory();
     }
-
     @Test
     void whenSaveThenReturnSuccess() {
         when(accessoryRepository.save(any())).thenReturn(accessory);
 
-        AccessoryResponseDTO response = service.save(accessoryRequestDTO);
+        accessoryResponseDTO = service.save(accessoryRequestDTO);
 
-        assertNotNull(response);
-        assertEquals(AccessoryResponseDTO.class, response.getClass());
-        assertEquals(ID, response.getId());
-        assertEquals(NAME, response.getName());
-        assertEquals(VALUES, response.getValues());
+        assertNotNull(accessoryResponseDTO);
+        assertEquals(AccessoryResponseDTO.class, accessoryResponseDTO.getClass());
+        assertEquals(ID, accessoryResponseDTO.getId());
+        assertEquals(NAME, accessoryResponseDTO.getName());
+        assertEquals(VALUES, accessoryResponseDTO.getValues());
     }
-
     @Test
     void whenFindAllThenReturnAnListOfAccessories() {
         when(accessoryRepository.findAll()).thenReturn(List.of(accessory));
@@ -71,22 +65,47 @@ class AccessoryServiceTest {
         assertEquals(NAME, response.get(INDEX).getName());
         assertEquals(VALUES, response.get(INDEX).getValues());
     }
-
     @Test
     void whenFindByIdThenReturnAnInstanceAccessory() {
         when(accessoryRepository.findById(anyInt())).thenReturn(Optional.ofNullable(accessory));
 
-        Accessory response = service.findById(ID);
+        accessory = service.findById(ID);
 
-        assertNotNull(response);
-        assertEquals(Accessory.class, response.getClass());
-        assertEquals(ID, response.getId());
-        assertEquals(NAME, response.getName());
-        assertEquals(VALUES, response.getValues());
+        assertNotNull(accessory);
+        assertEquals(Accessory.class, accessory.getClass());
+        assertEquals(ID, accessory.getId());
+        assertEquals(NAME, accessory.getName());
+        assertEquals(VALUES, accessory.getValues());
     }
+    @Test
+    void whenUpdateThenReturnSuccess(){
+        when(accessoryRepository.findById(anyInt())).thenReturn(Optional.ofNullable(accessory));
+        when(accessoryRepository.save(any())).thenReturn(accessory);
+
+        accessoryResponseDTO = service.update(accessoryRequestDTO, ID);
+
+        assertNotNull(accessoryResponseDTO);
+        assertEquals(AccessoryResponseDTO.class, accessoryResponseDTO.getClass());
+        assertEquals(ID, accessoryResponseDTO.getId());
+        assertEquals(NAME, accessoryResponseDTO.getName());
+        assertEquals(VALUES, accessoryResponseDTO.getValues());
+    }
+    @Test
+    void whenUpdateThenReturnNoSushElementException(){
+        when(accessoryRepository.findById(anyInt())).thenThrow(new NoSuchElementException("Accessory not found"));
+
+        try{
+            service.findById(ID);
+        }catch (Exception e){
+            assertEquals(NoSuchElementException.class, e.getClass());
+            assertEquals("Accessory not found", e.getMessage());
+        }
+    }
+
     private void startAccessory(){
         accessory = new Accessory(ID, NAME, VALUES);
         accessoryRequestDTO = new AccessoryRequestDTO(NAME, VALUES);
         accessoryResponseDTO = new AccessoryResponseDTO(ID, NAME, VALUES);
     }
+
 }
