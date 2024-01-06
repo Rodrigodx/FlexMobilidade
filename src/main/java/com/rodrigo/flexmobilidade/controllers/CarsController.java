@@ -5,6 +5,7 @@ import com.rodrigo.flexmobilidade.dto.cars.CarsRequestDTO;
 import com.rodrigo.flexmobilidade.dto.cars.CarsResponseDTO;
 import com.rodrigo.flexmobilidade.services.CarsService;
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +21,7 @@ public class CarsController {
     private final CarsService carsService;
     @Operation(summary = "Realiza cadastro de carros no sistema", method = "POST")
     @PostMapping
-    public ResponseEntity<CarsResponseDTO> save(@RequestBody CarsRequestDTO carsRequestDTO){
+    public ResponseEntity<CarsResponseDTO> save(@RequestBody @Valid CarsRequestDTO carsRequestDTO){
         return new ResponseEntity<>(carsService.save(carsRequestDTO), HttpStatus.CREATED);
     }
     @Operation(summary = "Mostra todos os carros cadastrados", method = "GET")
@@ -29,8 +30,8 @@ public class CarsController {
         return ResponseEntity.ok(carsService.findAll());
     }
 
-    @GetMapping(value = "/id")
-    public ResponseEntity<Cars> findById(Integer id){
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<Cars> findById(@PathVariable Integer id){
         return ResponseEntity.ok(carsService.findById(id));
     }
 

@@ -1,5 +1,6 @@
 package com.rodrigo.flexmobilidade.model.user;
 
+import com.rodrigo.flexmobilidade.dto.user.UsersDTO;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -9,6 +10,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
@@ -32,6 +34,13 @@ public class Users implements UserDetails {
     private String password;
 
     private UserRole  role;
+
+    public Users(UsersDTO data){
+        this.name = data.getName();
+        this.email = data.getEmail();
+        this.password = data.getPassword();
+        this.role = data.getRole();
+    }
 
 
     @Override

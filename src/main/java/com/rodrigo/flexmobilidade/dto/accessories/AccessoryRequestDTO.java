@@ -7,6 +7,10 @@ public class AccessoryRequestDTO {
 
     private String name;
 
-    private Double value;
+    private Double values;
 
+    public AccessoryRequestDTO(String name, double values) {
+        this.name = name;
+        this.values = values;
+    }
 }

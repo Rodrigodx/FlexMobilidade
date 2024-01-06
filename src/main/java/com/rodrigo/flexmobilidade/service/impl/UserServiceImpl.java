@@ -1,9 +1,9 @@
 package com.rodrigo.flexmobilidade.service.impl;
 
+import com.rodrigo.flexmobilidade.dto.user.UsersRequestDto;
 import com.rodrigo.flexmobilidade.exceptions.UserPresentException;
 import com.rodrigo.flexmobilidade.model.user.Users;
 import com.rodrigo.flexmobilidade.model.user.UserRole;
-import com.rodrigo.flexmobilidade.dto.user.UsersDto;
 import com.rodrigo.flexmobilidade.repositories.UserRepository;
 import com.rodrigo.flexmobilidade.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +17,7 @@ import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
+
 	@Autowired
 	private UserRepository userRepository;
 	
@@ -25,10 +26,9 @@ public class UserServiceImpl implements UserService {
 	
 	@Autowired
 	AuthenticationManager authenticationManager;
-	
 
 	@Override
-	public UsersDto newUserRegistration(UsersDto usersDto) throws UserPresentException {
+	public UsersRequestDto newUserRegistration(UsersRequestDto usersDto) throws UserPresentException {
 		
 		Optional<Users> findByEmailAddress = userRepository.findByEmail(usersDto.getEmail());
 		if(!findByEmailAddress.isPresent()) {

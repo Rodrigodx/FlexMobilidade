@@ -1,4 +1,4 @@
-package com.rodrigo.flexmobilidade.infra.security;
+package com.rodrigo.flexmobilidade.dto.user;
 
 import lombok.Data;
 

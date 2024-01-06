@@ -6,6 +6,7 @@ import com.rodrigo.flexmobilidade.dto.categories.CategoryCarsRequestDTO;
 import com.rodrigo.flexmobilidade.dto.categories.CategoryRequestDTO;
 import com.rodrigo.flexmobilidade.dto.categories.CategoryResponseDTO;
 import com.rodrigo.flexmobilidade.services.CategoryService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,11 +21,11 @@ public class CategoryController {
 
     private final CategoryService categoryService;
     @PostMapping
-    public ResponseEntity<CategoryResponseDTO> save(@RequestBody CategoryRequestDTO categoryRequestDTO){
+    public ResponseEntity<CategoryResponseDTO> save(@RequestBody @Valid CategoryRequestDTO categoryRequestDTO){
         return new ResponseEntity<>(categoryService.save(categoryRequestDTO), HttpStatus.CREATED);
     }
     @PatchMapping(value = "/{id}")
-    public ResponseEntity<CategoryResponseDTO> addCars(@RequestBody CategoryCarsRequestDTO categoryCarsRequestDTO, @PathVariable Integer id){
+    public ResponseEntity<CategoryResponseDTO> addCars(@RequestBody @Valid CategoryCarsRequestDTO categoryCarsRequestDTO, @PathVariable Integer id){
         return ResponseEntity.ok(categoryService.addCars(categoryCarsRequestDTO, id));
     }
     @GetMapping

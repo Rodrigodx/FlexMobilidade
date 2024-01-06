@@ -1,13 +1,14 @@
 package com.rodrigo.flexmobilidade.controllers;
 
 
+import com.rodrigo.flexmobilidade.dto.user.UsersRequestDto;
 import com.rodrigo.flexmobilidade.exceptions.UserPresentException;
-import com.rodrigo.flexmobilidade.infra.security.JwtAuthRequest;
+import com.rodrigo.flexmobilidade.dto.user.JwtAuthRequest;
 import com.rodrigo.flexmobilidade.infra.security.JwtAuthResponse;
 import com.rodrigo.flexmobilidade.infra.security.JwtService;
 import com.rodrigo.flexmobilidade.infra.security.UserInfoUserDetailsService;
 import com.rodrigo.flexmobilidade.model.ReturnData;
-import com.rodrigo.flexmobilidade.dto.user.UsersDto;
+
 import com.rodrigo.flexmobilidade.services.UserService;
 import com.rodrigo.flexmobilidade.utility.Constants;
 import jakarta.validation.Valid;
@@ -36,9 +37,9 @@ public class UsersController {
 
 	
 	@PostMapping(path = USER_REGISTRATION)
-	public ResponseEntity<?> newUserRegistration(@Valid @RequestBody UsersDto usersDto) throws UserPresentException, UserPresentException {
+	public ResponseEntity<?> newUserRegistration(@Valid @RequestBody UsersRequestDto usersDto) throws UserPresentException, UserPresentException {
 		ReturnData data = new ReturnData();
-		UsersDto returnData = this.userService.newUserRegistration(usersDto);
+		UsersRequestDto returnData = this.userService.newUserRegistration(usersDto);
 		data.setData(returnData);
 		data.setMessage(Constants.NEW_USER);
 		data.setStatusCode(Constants.CREATED);
