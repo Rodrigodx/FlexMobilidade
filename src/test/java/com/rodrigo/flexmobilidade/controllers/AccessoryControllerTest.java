@@ -5,12 +5,16 @@ import com.rodrigo.flexmobilidade.dto.accessories.AccessoryResponseDTO;
 import com.rodrigo.flexmobilidade.model.accessories.Accessory;
 import com.rodrigo.flexmobilidade.services.AccessoryService;
 import org.apache.coyote.Response;
+import org.hibernate.annotations.Immutable;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.ResponseEntity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.eq;
@@ -42,7 +46,15 @@ class AccessoryControllerTest {
     }
 
     @Test
-    void findAll() {
+    void whenFindAllThenReturnSuccess() {
+        when(accessoryService.findAll()).thenReturn(List.of(accessoryResponseDTO));
+
+        ResponseEntity<List<AccessoryResponseDTO>> response = accessoryController.findAll();
+
+        assertNotNull(response);
+        assertNotNull(response.getBody());
+        assertEquals(ResponseEntity.class, response.getClass());
+        assertEquals(AccessoryResponseDTO.class, response.getBody().get(INDEX).getClass());
     }
 
     @Test
@@ -58,7 +70,6 @@ class AccessoryControllerTest {
         assertEquals(ID, response.getBody().getId());
         assertEquals(NAME, response.getBody().getName());
         assertEquals(VALUES, response.getBody().getValues());
-
     }
 
     @Test
