@@ -6,11 +6,10 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.UUID;
 
 @Getter
 @Setter
-public class UsersDto {
+public class UsersRequestDto {
 	@NotBlank(message = "Please enter a first name")
 	private String name;
 	@NotBlank(message = "Please enter a Email Address")
