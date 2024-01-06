@@ -6,7 +6,6 @@ import com.rodrigo.flexmobilidade.dto.accessories.AccessoryResponseDTO;
 import com.rodrigo.flexmobilidade.repositories.AccessoryRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.annotation.ReadOnlyProperty;
 import org.springframework.stereotype.Service;
@@ -39,7 +38,7 @@ public class AccessoryService {
 
     @Transactional
     public void delete(Integer id){
-        Optional<Accessory> accessory = Optional.ofNullable(findById(id));
+        Optional<Accessory> accessory = accessoryRepository.findById(id);
         if (accessory.isPresent()){
             accessoryRepository.deleteById(id);
         }else {

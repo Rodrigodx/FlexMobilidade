@@ -104,28 +104,25 @@ class AccessoryServiceTest {
 
     @Test
     void deleteWithSuccess(){
-        when(accessoryRepository.findById(anyInt())).thenReturn(Optional.ofNullable(accessory));
-        doNothing().when(accessoryRepository).deleteById(anyInt());
+        when(accessoryRepository.findById(eq(ID))).thenReturn(Optional.ofNullable(accessory));
+        doNothing().when(accessoryRepository).deleteById(eq(ID));
 
         service.delete(ID);
 
         verify(accessoryRepository, times(1)).deleteById(eq(ID));
-        assertEquals(ID, accessory.getId());
     }
 
     @Test
     void deleteWithNotSuccess(){
-        when(accessoryRepository.findById(anyInt())).thenThrow(new NoSuchElementException("Accessory with ID:" + ID + " not found"));
-
+        when(accessoryRepository.findById(anyInt())).thenReturn(Optional.empty());
         try {
-
             service.delete(ID);
-
+            fail("Expected NoSuchElementException was not thrown");
+            verify(accessoryRepository, times(1)).deleteById(ID);
         }catch (NoSuchElementException e){
             assertEquals(NoSuchElementException.class, e.getClass());
             assertEquals("Accessory with ID:" + ID + " not found", e.getMessage());
         }
-
     }
 
     private void startAccessory(){
