@@ -11,12 +11,15 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 
@@ -42,7 +45,16 @@ class AccessoryControllerTest {
     }
 
     @Test
-    void save() {
+    void whenSaveThenReturnSuccess() {
+        when(accessoryService.save(any())).thenReturn(accessoryResponseDTO);
+
+        ResponseEntity<AccessoryResponseDTO> response = accessoryController.save(accessoryRequestDTO);
+
+        assertNotNull(response);
+        assertNotNull(response.getBody());
+        assertEquals(ResponseEntity.class, response.getClass());
+        assertEquals(AccessoryResponseDTO.class, response.getBody().getClass());
+        assertEquals(response.getStatusCode(), HttpStatus.CREATED);
     }
 
     @Test
@@ -55,6 +67,8 @@ class AccessoryControllerTest {
         assertNotNull(response.getBody());
         assertEquals(ResponseEntity.class, response.getClass());
         assertEquals(AccessoryResponseDTO.class, response.getBody().get(INDEX).getClass());
+        assertEquals(response.getStatusCode(), HttpStatus.OK);
+
     }
 
     @Test
@@ -70,6 +84,7 @@ class AccessoryControllerTest {
         assertEquals(ID, response.getBody().getId());
         assertEquals(NAME, response.getBody().getName());
         assertEquals(VALUES, response.getBody().getValues());
+        assertEquals(response.getStatusCode(), HttpStatus.OK);
     }
 
     @Test
