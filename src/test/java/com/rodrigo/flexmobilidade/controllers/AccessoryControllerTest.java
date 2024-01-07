@@ -4,24 +4,19 @@ import com.rodrigo.flexmobilidade.dto.accessories.AccessoryRequestDTO;
 import com.rodrigo.flexmobilidade.dto.accessories.AccessoryResponseDTO;
 import com.rodrigo.flexmobilidade.model.accessories.Accessory;
 import com.rodrigo.flexmobilidade.services.AccessoryService;
-import org.apache.coyote.Response;
-import org.hibernate.annotations.Immutable;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.Mockito.*;
 
 class AccessoryControllerTest {
     public static final int ID = 1;
@@ -88,11 +83,33 @@ class AccessoryControllerTest {
     }
 
     @Test
-    void delete() {
+    void whenDeleteThenReturnSuccess() {
+        doNothing().when(accessoryService).delete(anyInt());
+
+        ResponseEntity<Void> response = accessoryController.delete(ID);
+
+        assertNotNull(response);
+        assertEquals(ResponseEntity.class, response.getClass());
+        assertEquals(response.getStatusCode(), HttpStatus.NO_CONTENT);
+        verify(accessoryService, times(1)).delete(anyInt());
+
     }
 
     @Test
-    void update() {
+    void whenUpdateThenReturnSuccess() {
+        when(accessoryService.update(accessoryRequestDTO, ID)).thenReturn(accessoryResponseDTO);
+
+        ResponseEntity<AccessoryResponseDTO> response = accessoryController.update(accessoryRequestDTO, ID);
+
+        assertNotNull(response);
+        assertNotNull(response.getBody());
+        assertEquals(ResponseEntity.class, response.getClass());
+        assertEquals(response.getStatusCode(), HttpStatus.OK);
+
+        assertEquals(ID, response.getBody().getId());
+        assertEquals(NAME, response.getBody().getName());
+        assertEquals(VALUES, response.getBody().getValues());
+
     }
 
     private void startAccessory(){
