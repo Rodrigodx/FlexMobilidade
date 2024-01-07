@@ -22,7 +22,7 @@ import static org.mockito.Mockito.*;
 class AccessoryServiceTest {
 
     public static final int ID = 1;
-    public static final String NAME = "Acento criança";
+    public static final String NAME = "Test";
     public static final double VALUES = 25.00;
     public static final int INDEX = 0;
 
