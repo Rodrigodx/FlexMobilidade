@@ -35,6 +35,7 @@ public class SecurityConfig {
                         .requestMatchers("/user/registration", "/user/login", "/authenticate").permitAll()
                         .requestMatchers("/api/protection").hasRole("ADMIN")
                         .requestMatchers("/api/accessory").hasRole("ADMIN")
+                        .requestMatchers("/api/utility").hasRole("ADMIN")
                         .requestMatchers("/api/cars").hasRole("ADMIN")
                         .requestMatchers("/api/category").hasRole("ADMIN")
                         .anyRequest().authenticated())

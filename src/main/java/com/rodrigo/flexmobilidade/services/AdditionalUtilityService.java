@@ -1,8 +1,5 @@
 package com.rodrigo.flexmobilidade.services;
 
-import com.rodrigo.flexmobilidade.dto.accessories.AccessoryRequestDTO;
-import com.rodrigo.flexmobilidade.dto.accessories.AccessoryResponseDTO;
-import com.rodrigo.flexmobilidade.model.accessories.Accessory;
 import com.rodrigo.flexmobilidade.model.additionalutility.AdditionalUtility;
 import com.rodrigo.flexmobilidade.dto.additonalutility.AdditionalUtilityRequestDTO;
 import com.rodrigo.flexmobilidade.dto.additonalutility.AdditionalUtilityResponseDTO;
@@ -26,7 +23,9 @@ public class AdditionalUtilityService {
     private final ModelMapper modelMapper = new ModelMapper();
     @Transactional
     public AdditionalUtilityResponseDTO save(AdditionalUtilityRequestDTO additionalUtilityRequestDTO) {
-        AdditionalUtility additionalUtility = utilityRepository.save(modelMapper.map(additionalUtilityRequestDTO, AdditionalUtility.class));
+        AdditionalUtility additionalUtility = new AdditionalUtility();
+        additionalUtility.setQuantity(0);
+        additionalUtility = utilityRepository.save(modelMapper.map(additionalUtilityRequestDTO, AdditionalUtility.class));
         return modelMapper.map(additionalUtility, AdditionalUtilityResponseDTO.class);
     }
     @ReadOnlyProperty
@@ -62,7 +61,8 @@ public class AdditionalUtilityService {
             return modelMapper.map(updatedUtility, AdditionalUtilityResponseDTO.class);
         }
 
-        throw new NoSuchElementException("AdditionalUtility with ID:" + id + " not found");    }
+        throw new NoSuchElementException("AdditionalUtility with ID:" + id + " not found");
+    }
 
 }
 
