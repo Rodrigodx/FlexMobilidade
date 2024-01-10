@@ -20,6 +20,11 @@ public class AdditionalUtility {
     @Column(name = "value_column")
     private Double value;
 
-    private Integer quantity = 0;
+    private Integer quantity;
+
+    public void setQuantity(Integer quantity){
+        quantity = 0;
+        this.quantity = quantity;
+    }
 
 }
