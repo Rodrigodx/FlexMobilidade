@@ -11,6 +11,8 @@ import org.springframework.data.annotation.ReadOnlyProperty;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -21,7 +23,9 @@ public class AdditionalUtilityService {
     private final ModelMapper modelMapper = new ModelMapper();
     @Transactional
     public AdditionalUtilityResponseDTO save(AdditionalUtilityRequestDTO additionalUtilityRequestDTO) {
-        AdditionalUtility additionalUtility = utilityRepository.save(modelMapper.map(additionalUtilityRequestDTO, AdditionalUtility.class));
+        AdditionalUtility additionalUtility = new AdditionalUtility();
+        additionalUtility.setQuantity(0);
+        additionalUtility = utilityRepository.save(modelMapper.map(additionalUtilityRequestDTO, AdditionalUtility.class));
         return modelMapper.map(additionalUtility, AdditionalUtilityResponseDTO.class);
     }
     @ReadOnlyProperty
@@ -32,6 +36,32 @@ public class AdditionalUtilityService {
     @ReadOnlyProperty
     public AdditionalUtility findById(Integer id){
         return utilityRepository.findById(id).get();
+    }
+
+    @Transactional
+    public void delete(Integer id){
+        Optional<AdditionalUtility> utility = utilityRepository.findById(id);
+        if (utility.isPresent()){
+            utilityRepository.deleteById(id);
+        }else {
+            throw new NoSuchElementException("AdditionalUtility with ID:" + id + " not found");
+        }
+    }
+    @Transactional
+    public AdditionalUtilityResponseDTO update(AdditionalUtilityRequestDTO additionalUtilityRequestDTO, Integer id) throws IllegalArgumentException {
+        Optional<AdditionalUtility> utilityOptional = utilityRepository.findById(id);
+        if (utilityOptional.isPresent()) {
+            AdditionalUtility additionalUtility = utilityOptional.get();
+
+            additionalUtility.setName(additionalUtilityRequestDTO.getName());
+            additionalUtility.setValue(additionalUtilityRequestDTO.getValue());
+
+            AdditionalUtility updatedUtility = utilityRepository.save(additionalUtility);
+
+            return modelMapper.map(updatedUtility, AdditionalUtilityResponseDTO.class);
+        }
+
+        throw new NoSuchElementException("AdditionalUtility with ID:" + id + " not found");
     }
 
 }

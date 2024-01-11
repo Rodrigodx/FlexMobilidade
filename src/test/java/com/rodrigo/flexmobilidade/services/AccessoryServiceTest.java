@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -18,7 +19,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.*;
-
 class AccessoryServiceTest {
 
     public static final int ID = 1;
@@ -31,8 +31,11 @@ class AccessoryServiceTest {
     @Mock
     private AccessoryRepository accessoryRepository;
 
+    @Mock
     private AccessoryRequestDTO accessoryRequestDTO;
+    @Mock
     private AccessoryResponseDTO accessoryResponseDTO;
+    @Mock
     private Accessory accessory;
     @BeforeEach
     void setUp() {
