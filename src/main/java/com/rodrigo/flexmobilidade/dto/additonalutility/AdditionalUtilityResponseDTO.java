@@ -18,11 +18,7 @@ public class AdditionalUtilityResponseDTO {
         this.id = id;
         this.name = name;
         this.value = value;
-        this.quantity = quantity;
+        this.quantity = 0;
     }
 
-    public void setQuantity(Integer quantity) {
-        quantity = 0;
-        this.quantity = quantity;
-    }
 }

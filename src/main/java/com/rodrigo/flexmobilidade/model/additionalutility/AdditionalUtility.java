@@ -22,9 +22,4 @@ public class AdditionalUtility {
 
     private Integer quantity;
 
-    public void setQuantity(Integer quantity){
-        quantity = 0;
-        this.quantity = quantity;
-    }
-
 }
