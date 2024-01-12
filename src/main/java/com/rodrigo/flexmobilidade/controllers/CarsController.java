@@ -35,5 +35,15 @@ public class CarsController {
         return ResponseEntity.ok(carsService.findById(id));
     }
 
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Integer id){
+        carsService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<CarsResponseDTO> update(@RequestBody CarsRequestDTO carsRequestDTO, @PathVariable Integer id){
+        return ResponseEntity.ok(carsService.update(carsRequestDTO, id));
+    }
+
 
 }

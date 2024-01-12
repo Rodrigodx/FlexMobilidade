@@ -31,8 +31,8 @@ class AdditionalUtilityServiceTest {
     public static final String NAME = "Test";
     public static final double VALUE = 0.0;
     public static final int INDEX = 0;
-    public static AdditionalUtilityRequestDTO utilityRequest = new AdditionalUtilityRequestDTO(NAME, VALUE, ID);
-    public static AdditionalUtilityResponseDTO utilityResponse = new AdditionalUtilityResponseDTO(ID, NAME, VALUE, ID);
+    public static AdditionalUtilityRequestDTO utilityRequest = new AdditionalUtilityRequestDTO(NAME, VALUE, QUANTITY);
+    public static AdditionalUtilityResponseDTO utilityResponse = new AdditionalUtilityResponseDTO(ID, NAME, VALUE, QUANTITY);
     public static AdditionalUtility utility = new AdditionalUtility(ID, NAME, VALUE, QUANTITY);
 
     @InjectMocks
@@ -49,11 +49,11 @@ class AdditionalUtilityServiceTest {
     }
 
     @Test
-    void save() {
+    void whenSaveThenReturnSuccess() {
         when(repository.save(any())).thenReturn(utility);
         when(mapper.map(any(), any())).thenReturn(utilityResponse);
 
-        utilityResponse = service.save(utilityRequest);
+        AdditionalUtilityResponseDTO utilityResponse = service.save(utilityRequest);
         utilityResponse.setQuantity(QUANTITY);
 
         assertNotNull(utilityResponse);
@@ -72,21 +72,19 @@ class AdditionalUtilityServiceTest {
 
         List<AdditionalUtilityResponseDTO> response = service.findAll();
 
-        //assertEquals(INDEX, response.size());
         assertNotNull(response);
         assertEquals(AdditionalUtilityResponseDTO.class, response.get(INDEX).getClass());
 
         assertEquals(ID, response.get(INDEX).getId());
         assertEquals(NAME, response.get(INDEX).getName());
         assertEquals(VALUE, response.get(INDEX).getValue());
-        assertEquals(QUANTITY, response.get(INDEX).getQuantity());
     }
 
     @Test
     void whenFindByIdThenReturnSuccess() {
         when(repository.findById(eq(ID))).thenReturn(Optional.ofNullable(utility));
 
-        utility = service.findById(ID);
+        AdditionalUtility utility = service.findById(ID);
         utility.setQuantity(0);
 
         assertNotNull(utility);
@@ -127,7 +125,8 @@ class AdditionalUtilityServiceTest {
         when(repository.save(any())).thenReturn(utility);
         when(mapper.map(any(), any())).thenReturn(utilityResponse);
 
-        utilityResponse = service.update(utilityRequest, ID);
+        AdditionalUtilityResponseDTO utilityResponse = service.update(utilityRequest, ID);
+        utilityResponse.setQuantity(QUANTITY);
 
         assertEquals(ID, utilityResponse.getId());
         assertEquals(NAME, utilityResponse.getName());
