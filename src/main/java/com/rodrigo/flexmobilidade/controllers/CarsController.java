@@ -1,7 +1,5 @@
 package com.rodrigo.flexmobilidade.controllers;
 
-import com.rodrigo.flexmobilidade.dto.accessories.AccessoryRequestDTO;
-import com.rodrigo.flexmobilidade.dto.accessories.AccessoryResponseDTO;
 import com.rodrigo.flexmobilidade.model.cars.Cars;
 import com.rodrigo.flexmobilidade.dto.cars.CarsRequestDTO;
 import com.rodrigo.flexmobilidade.dto.cars.CarsResponseDTO;
