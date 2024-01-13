@@ -1,6 +1,5 @@
 package com.rodrigo.flexmobilidade.controllers;
 
-
 import com.rodrigo.flexmobilidade.model.categories.Category;
 import com.rodrigo.flexmobilidade.dto.categories.CategoryCarsRequestDTO;
 import com.rodrigo.flexmobilidade.dto.categories.CategoryRequestDTO;
@@ -36,6 +35,16 @@ public class CategoryController {
     @GetMapping(value = "/{id}")
     public ResponseEntity<Category> findById(@PathVariable Integer id){
         return ResponseEntity.ok(categoryService.findById(id));
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Integer id){
+        categoryService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<CategoryResponseDTO> update(@RequestBody CategoryRequestDTO categoryRequestDTO, @PathVariable Integer id){
+        return ResponseEntity.ok(categoryService.update(categoryRequestDTO, id));
     }
 
 }
