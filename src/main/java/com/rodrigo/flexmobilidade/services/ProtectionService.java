@@ -1,5 +1,8 @@
 package com.rodrigo.flexmobilidade.services;
 
+import com.rodrigo.flexmobilidade.dto.categories.CategoryRequestDTO;
+import com.rodrigo.flexmobilidade.dto.categories.CategoryResponseDTO;
+import com.rodrigo.flexmobilidade.model.categories.Category;
 import com.rodrigo.flexmobilidade.model.protections.Protection;
 import com.rodrigo.flexmobilidade.dto.protections.ProtectionRequestDTO;
 import com.rodrigo.flexmobilidade.dto.protections.ProtectionResponseDTO;
@@ -8,9 +11,12 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.annotation.ReadOnlyProperty;
+import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -34,4 +40,30 @@ public class ProtectionService {
         return protectionRepository.findById(id).get();
     }
 
+    @Transactional
+    public void delete(Integer id){
+        Optional<Protection> protection = protectionRepository.findById(id);
+        if (protection.isPresent()){
+            protectionRepository.deleteById(id);
+        }else {
+            throw new NoSuchElementException("Protection with ID:" + id + " not found");
+        }
+    }
+    @Transactional
+    public ProtectionResponseDTO update(ProtectionRequestDTO protectionRequestDTO, Integer id) throws IllegalArgumentException {
+        Optional<Protection> optionalProtection = protectionRepository.findById(id);
+        if (optionalProtection.isPresent()) {
+            Protection protection = optionalProtection.get();
+
+            protection.setName(protectionRequestDTO.getName());
+            protection.setBenefits(protectionRequestDTO.getBenefits());
+            protection.setValue(protectionRequestDTO.getValue());
+
+            Protection updatedProtection = protectionRepository.save(protection);
+
+            return modelMapper.map(updatedProtection, ProtectionResponseDTO.class);
+        }
+
+        throw new NoSuchElementException("Protection with ID:" + id + " not found");
+    }
 }
