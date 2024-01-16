@@ -1,7 +1,6 @@
 package com.rodrigo.flexmobilidade.controllers;
 
-import com.rodrigo.flexmobilidade.dto.categories.CategoryRequestDTO;
-import com.rodrigo.flexmobilidade.dto.categories.CategoryResponseDTO;
+
 import com.rodrigo.flexmobilidade.model.protections.Protection;
 import com.rodrigo.flexmobilidade.dto.protections.ProtectionRequestDTO;
 import com.rodrigo.flexmobilidade.dto.protections.ProtectionResponseDTO;
