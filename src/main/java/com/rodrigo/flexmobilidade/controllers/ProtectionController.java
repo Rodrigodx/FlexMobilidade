@@ -1,5 +1,7 @@
 package com.rodrigo.flexmobilidade.controllers;
 
+import com.rodrigo.flexmobilidade.dto.categories.CategoryRequestDTO;
+import com.rodrigo.flexmobilidade.dto.categories.CategoryResponseDTO;
 import com.rodrigo.flexmobilidade.model.protections.Protection;
 import com.rodrigo.flexmobilidade.dto.protections.ProtectionRequestDTO;
 import com.rodrigo.flexmobilidade.dto.protections.ProtectionResponseDTO;
@@ -29,5 +31,15 @@ public class ProtectionController {
     @GetMapping(value = "/{id}")
     public ResponseEntity<Protection> findById(@PathVariable Integer id){
         return ResponseEntity.ok(protectionService.findById(id));
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Integer id){
+        protectionService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<ProtectionResponseDTO> update(@RequestBody ProtectionRequestDTO protectionRequestDTO, @PathVariable Integer id){
+        return ResponseEntity.ok(protectionService.update(protectionRequestDTO, id));
     }
 }
