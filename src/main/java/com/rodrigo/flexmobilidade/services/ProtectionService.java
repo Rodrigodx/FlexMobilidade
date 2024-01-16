@@ -63,7 +63,6 @@ public class ProtectionService {
 
             return modelMapper.map(updatedProtection, ProtectionResponseDTO.class);
         }
-
         throw new NoSuchElementException("Protection with ID:" + id + " not found");
     }
 }
