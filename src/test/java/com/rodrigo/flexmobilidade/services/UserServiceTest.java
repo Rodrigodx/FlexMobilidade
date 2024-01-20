@@ -19,6 +19,7 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 class UserServiceTest {
@@ -61,7 +62,7 @@ class UserServiceTest {
     }
 
     @Test
-    void whenNewUserRegistrationThenReturnUserPresentException() throws UserPresentException {
+    void whenNewUserRegistrationThenReturnUserPresentException() {
         when(repository.findByEmail(any())).thenReturn(Optional.ofNullable(USERS));
 
         try{
