@@ -1,5 +1,6 @@
 package com.rodrigo.flexmobilidade.services;
 
+import com.rodrigo.flexmobilidade.dto.cars.CarsResponseDTO;
 import com.rodrigo.flexmobilidade.model.cars.Cars;
 import com.rodrigo.flexmobilidade.model.categories.Category;
 import com.rodrigo.flexmobilidade.dto.categories.CategoryCarsRequestDTO;
@@ -13,6 +14,7 @@ import org.springframework.data.annotation.ReadOnlyProperty;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -31,9 +33,6 @@ public class CategoryService {
     @Transactional
     public CategoryResponseDTO addCars(CategoryCarsRequestDTO categoryCarsRequestDTO, Integer id){
         List<Cars> carsList = categoryCarsRequestDTO.getCarsList().stream().map(carsDTO -> carsService.findById(carsDTO.getId())).toList();
-
-        System.out.println(carsList);
-
 
         Optional<Category> existingCategoryOptional = categoryRepository.findById(id);
 
@@ -58,6 +57,31 @@ public class CategoryService {
     @ReadOnlyProperty
     public Category findById(Integer id){
         return categoryRepository.findById(id).get();
+    }
+
+    @Transactional
+    public void delete(Integer id){
+        Optional<Category> category = categoryRepository.findById(id);
+        if (category.isPresent()){
+            categoryRepository.deleteById(id);
+        }else {
+            throw new NoSuchElementException("Category with ID:" + id + " not found");
+        }
+    }
+    @Transactional
+    public CategoryResponseDTO update(CategoryRequestDTO categoryRequestDTO, Integer id) throws IllegalArgumentException {
+        Optional<Category> optionalCategory = categoryRepository.findById(id);
+        if (optionalCategory.isPresent()) {
+            Category category = optionalCategory.get();
+
+            category.setName(categoryRequestDTO.getName());
+
+            Category updatedCategory = categoryRepository.save(category);
+
+            return modelMapper.map(updatedCategory, CategoryResponseDTO.class);
+        }
+
+        throw new NoSuchElementException("Category with ID:" + id + " not found");
     }
 
 
