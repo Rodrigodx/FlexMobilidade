@@ -15,6 +15,7 @@ import org.springframework.data.annotation.ReadOnlyProperty;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -60,5 +61,39 @@ public class ReservaService {
     public Optional<ReservaResponseDTO> findById(Integer id){
         Optional<Reserva> reserva = reservaRepository.findById(id);
         return Optional.ofNullable(modelMapper.map(reserva, ReservaResponseDTO.class));
+    }
+    @Transactional
+    public void delete(Integer id){
+        Optional<Reserva> reserva = reservaRepository.findById(id);
+        if (reserva.isPresent()){
+            reservaRepository.deleteById(id);
+        }else {
+            throw new NoSuchElementException("Reserva with ID:" + id + " not found");
+        }
+    }
+    @Transactional
+    public ReservaResponseDTO update(ReservaRequestDTO reservaRequestDTO, Integer id) throws IllegalArgumentException {
+        Optional<Reserva> optionalReserva = reservaRepository.findById(id);
+        if (optionalReserva.isPresent()) {
+            Reserva reserva = optionalReserva.get();
+            Category category = categoryService.findById(reservaRequestDTO.getCategory());
+            Protection protection = protectionService.findById(reservaRequestDTO.getProtection());
+            List<Accessory> accessories = reservaRequestDTO.getAccessories().stream().map(accessory -> accessoryService.findById(accessory.getId())).toList();
+            List<AdditionalUtility> additionalUtilities = reservaRequestDTO.getAdditionalUtilities().stream().map(additionalUtility -> additionalUtilityService.findById(additionalUtility.getId())).toList();
+
+            reserva.setLocation(reservaRequestDTO.getLocation());
+            reserva.setPersonalData(reservaRequestDTO.getPersonalData());
+            reserva.setInicial(reservaRequestDTO.getInicial());
+            reserva.setFinish(reservaRequestDTO.getFinish());
+            reserva.setCategory(category);
+            reserva.setProtection(protection);
+            reserva.setAccessories(accessories);
+            reserva.setAdditionalUtilities(additionalUtilities);
+
+            Reserva updatedReserva = reservaRepository.save(reserva);
+
+            return modelMapper.map(updatedReserva, ReservaResponseDTO.class);
+        }
+        throw new NoSuchElementException("Reserva with ID:" + id + " not found");
     }
 }
