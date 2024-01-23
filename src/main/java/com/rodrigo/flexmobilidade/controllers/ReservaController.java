@@ -32,5 +32,13 @@ public class ReservaController {
     public ResponseEntity<Optional<ReservaResponseDTO>> findById(@PathVariable Integer id){
         return ResponseEntity.ok(reservaService.findById(id));
     }
-
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Integer id){
+        reservaService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<ReservaResponseDTO> update(@RequestBody ReservaRequestDTO reservaRequestDTO, @PathVariable Integer id){
+        return ResponseEntity.ok(reservaService.update(reservaRequestDTO, id));
+    }
 }
