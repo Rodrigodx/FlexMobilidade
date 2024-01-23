@@ -3,6 +3,7 @@ package com.rodrigo.flexmobilidade.dto.reserva;
 import com.rodrigo.flexmobilidade.dto.accessories.AccessoryDTO;
 import com.rodrigo.flexmobilidade.dto.additonalutility.AdditionalUtilityDTO;
 import com.rodrigo.flexmobilidade.model.reserva.PersonalData;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -10,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
+@AllArgsConstructor
 public class ReservaRequestDTO {
 
     private String location;

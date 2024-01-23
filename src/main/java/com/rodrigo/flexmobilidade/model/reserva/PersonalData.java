@@ -1,10 +1,12 @@
 package com.rodrigo.flexmobilidade.model.reserva;
 
 import jakarta.persistence.Embeddable;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Embeddable
 @Data
+@AllArgsConstructor
 public class PersonalData {
 
     private String name;
@@ -14,5 +16,4 @@ public class PersonalData {
     private String email;
 
     private String telefone;
-
 }
