@@ -46,6 +46,7 @@ class AccessoryRequestDTOTest {
 
     @Test
     void setValues() {
+        accessoryDTO.setValues(VALUES);
     }
 
     @Test
