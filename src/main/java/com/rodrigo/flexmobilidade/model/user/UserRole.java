@@ -1,6 +1,7 @@
 package com.rodrigo.flexmobilidade.model.user;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
 public enum UserRole {
