@@ -11,6 +11,7 @@ class AccessoryRequestDTOTest {
     public static final AccessoryRequestDTO ACCESSORY_DTO_1 = new AccessoryRequestDTO("test", 1.0);
     public static final AccessoryRequestDTO ACCESSORY_DTO_2 = new AccessoryRequestDTO("test", 1.0);
     public static final AccessoryRequestDTO ACCESSORY_DTO_3 = new AccessoryRequestDTO("test2", 2.0);
+    public static final AccessoryRequestDTO ACCESSORY_DTO_4 = new AccessoryRequestDTO();
     public static final String EXPECTED = "AccessoryRequestDTO(name=test, values=1.0)";
     public static final String NAME = "test";
     public static final Double VALUES = 1.0;
@@ -67,5 +68,10 @@ class AccessoryRequestDTOTest {
     @Test
     void testToString() {
         assertEquals(EXPECTED, ACCESSORY_DTO_1.toString());
+    }
+
+    @Test
+    void testNoArgsConstructor(){
+        assertNotNull(ACCESSORY_DTO_4);
     }
 }
