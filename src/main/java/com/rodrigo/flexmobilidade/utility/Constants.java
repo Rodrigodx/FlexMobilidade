@@ -1,7 +1,10 @@
 package com.rodrigo.flexmobilidade.utility;
 
+import lombok.Data;
+
 import java.io.Serializable;
 
+@Data
 public class Constants implements Serializable {
     public static final String UNABLE_TO_PROCESS = "Unable to process something went wrong !..";
     /** The Constant SUCCESS_CODE. */
