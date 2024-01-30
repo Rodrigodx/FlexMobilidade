@@ -1,16 +1,14 @@
 package com.rodrigo.flexmobilidade.dto.accessories;
 
-import lombok.Data;
 
+import lombok.*;
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class AccessoryRequestDTO {
 
     private String name;
 
     private Double values;
 
-    public AccessoryRequestDTO(String name, double values) {
-        this.name = name;
-        this.values = values;
-    }
 }
